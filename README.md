@@ -1,5 +1,3 @@
-# documenta-o-geral
-
 # REDE PARA CAPTAÇÃO DE DADOS VINDOS DE VENTILADOR VITA  [VITA](https://github.com/orgs/systemVITA/repositories). 
 
 Projeto de uma rede para extração de dados de um Arduino Rev2 microcontrolador do ventilador VITA.

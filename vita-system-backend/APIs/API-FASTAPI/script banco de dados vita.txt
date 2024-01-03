@@ -1,0 +1,31 @@
+-- Criação da tabela de funcionários com a coluna 'status'
+CREATE TABLE funcionarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    rg VARCHAR(12) UNIQUE NOT NULL,
+    cargo ENUM('medico', 'enfermeiro', 'admin') NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    status ENUM('Ativo', 'Inativo') DEFAULT 'Ativo'
+);
+
+
+-- Criação da tabela de pacientes
+CREATE TABLE pacientes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    rg VARCHAR(12) UNIQUE NOT NULL
+);
+
+-- Adiciona a coluna 'status' à tabela 'pacientes'
+ALTER TABLE pacientes
+ADD COLUMN status ENUM('Ativo', 'Em espera', 'Alta médica', 'Transferido', 'Óbito') DEFAULT 'Ativo';
+
+
+-- Criação da tabela de dados
+CREATE TABLE dados (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    texto TEXT NOT NULL
+);
