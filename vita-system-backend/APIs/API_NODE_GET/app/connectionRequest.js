@@ -4,7 +4,7 @@ module.exports = function () {
     const conex = mysql.createConnection({
                                             host:"db",
                                             user:"root",
-                                            password:"123",
+                                            password:"root",
                                             database:"myDB",
                                             port:'3306'
                                         });
