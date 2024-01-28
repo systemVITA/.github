@@ -1,98 +1,97 @@
-# Project Vita-System - NETWORK FOR DATA CAPTURE FROM VITA VENTILATOR  [VITA](https://github.com/orgs/systemVITA/repositories). ![VITA Logo](logo.png)
+# Projeto Vita-System - REDE PARA CAPTAÇÃO DE DADOS DO VENTILADOR VITA [VITA](https://github.com/orgs/systemVITA/repositories). ![Logotipo VITA](logo.png)
 
-Project of a network for data extraction from an Arduino Rev2 microcontroller of the VITA ventilator. VITA control system and data receiving platform
-The VITA Project is an initiative aimed at developing an innovative embedded system for monitoring and controlling medical devices, using Internet of Things (IoT) technologies and hardware and software integration. The central objective is to enable efficient monitoring of medical devices, providing a user-friendly graphical interface for real-time visualization, as well as secure communication with a database for subsequent analysis.
+Projeto de uma rede para extração de dados de um microcontrolador Arduino Rev2 do ventilador VITA. Sistema de controle VITA e plataforma de recebimento de dados.
+O Projeto VITA é uma iniciativa voltada para o desenvolvimento de um sistema embarcado inovador para monitoramento e controle de dispositivos médicos, utilizando tecnologias de Internet das Coisas (IoT) e integração de hardware e software. O objetivo central é possibilitar um monitoramento eficiente de dispositivos médicos, fornecendo uma interface gráfica amigável para visualização em tempo real, além de comunicação segura com um banco de dados para análises posteriores.
 
-## Key Features
+## Principais Características
 
-- Real-Time Monitoring: Through bidirectional communication between the medical device and the web interface, data is presented in real-time, enabling precise monitoring.
+- Monitoramento em Tempo Real: Através da comunicação bidirecional entre o dispositivo médico e a interface web, os dados são apresentados em tempo real, possibilitando um acompanhamento preciso.
 
-- Remote Control: The system allows remote control of the medical device through the graphical interface, enabling adjustments to parameters and settings.
+- Controle Remoto: O sistema permite o controle remoto do dispositivo médico por meio da interface gráfica, possibilitando ajustes em parâmetros e configurações.
 
-- Data Storage: Collected data is securely stored in a database or CSV file, allowing for future analysis and report generation.
+- Armazenamento de Dados: Os dados coletados são armazenados de forma segura em um banco de dados ou arquivo CSV, permitindo análises futuras e a geração de relatórios.
 
-- Cutting-Edge Technologies: Utilization of MQTT and HTTP protocols for communication between hardware and the web interface, demonstrating the use of advanced technologies.
+- Tecnologias Avançadas: Utilização dos protocolos MQTT e HTTP para comunicação entre hardware e interface web, demonstrando o uso de tecnologias avançadas.
 
-## How to Use
+## Como Utilizar
 
-1. **Installation:**
-   - Clone this repository to your local machine.
-   - Install the necessary dependencies listed in the `requirements.txt` file.
+1. **Instalação:**
+   - Clone este repositório em sua máquina local.
+   - Instale as dependências necessárias listadas no arquivo `requirements.txt`.
 
-2. **Configuration:**
-   - Follow the instructions in the project documentation to configure the Access Point on the Arduino Wi-Fi R2.
+2. **Configuração:**
+   - Siga as instruções na documentação do projeto para configurar o Access Point no Arduino Wi-Fi R2.
 
-3. **Execution:**
-   - Run the graphical interface server by executing the command `python app.py`.
-   - Access the web interface in your browser using the address `http://localhost:3000`.
+3. **Execução:**
+   - Execute o servidor da interface gráfica executando o comando `python app.py`.
+   - Acesse a interface web no navegador utilizando o endereço `http://localhost:3000`.
 
-4. **Usage:**
-   - View real-time data on the graphical interface.
-   - Make adjustments and remotely control the medical device.
+4. **Utilização:**
+   - Visualize os dados em tempo real na interface gráfica.
+   - Faça ajustes e controle o dispositivo médico remotamente.
 
-## Contribution
+## Contribuição
 
-Contributions are welcome! If you find any bugs or have any suggestions for improvement, please open an issue or submit a pull request.
+Contribuições são bem-vindas! Se você encontrou algum bug ou tem alguma sugestão de melhoria, por favor, abra uma issue ou envie um pull request.
 
-## Credits
+## Créditos
 
-This project was developed by Nerval Junior and is part of an academic/research work. For more information, refer to the mentioned documents and references.
+Este projeto foi desenvolvido por Nerval Junior e faz parte de um trabalho acadêmico/pesquisa. Para mais informações, consulte os documentos e referências mencionados.
 
 ### ⚡️ Backend
-- FastAPI for data from the microcontroller
-- TypeScript with Express
+- FastAPI para dados provenientes do microcontrolador
+- TypeScript com Express
 - MySQL
 
 ### 🎨 Frontend
 - Next.js
 - React.js
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Este é um projeto [Next.js](https://nextjs.org/) inicializado com [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Primeiros Passos
 
-First, run the development server:
+Primeiro, execute o servidor de desenvolvimento:
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
-# or
+# ou
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Você pode começar a editar a página modificando `pages/index.tsx`. A página se atualiza automaticamente conforme você edita o arquivo.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Rotas de [API](https://nextjs.org/docs/api-routes/introduction) podem ser acessadas em [http://localhost:3000/api/hello](http://localhost:3000/api/hello). Este endpoint pode ser editado em `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+O diretório `pages/api` é mapeado para `/api/*`. Arquivos neste diretório são tratados como [rotas de API](https://nextjs.org/docs/api-routes/introduction) em vez de páginas React.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Este projeto utiliza [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) para otimizar e carregar automaticamente a Inter, uma fonte personalizada do Google.
 
-## Learn More
+## Saiba Mais
 
-To learn more about Next.js, take a look at the following resources:
+Para saber mais sobre Next.js, consulte os seguintes recursos:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Documentação do Next.js](https://nextjs.org/docs) - aprenda sobre os recursos e a API do Next.js.
+- [Aprenda Next.js](https://nextjs.org/learn) - um tutorial interativo do Next.js.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Você pode conferir [o repositório do Next.js no GitHub](https://github.com/vercel/next.js/) - seu feedback e contribuições são bem-vindos!
 
-## Deploy on Vercel
+## Implante na Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+A maneira mais fácil de implantar seu aplicativo Next.js é usar a [Plataforma Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) dos criadores do Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Confira nossa [documentação de implantação do Next.js](https://nextjs.org/docs/deployment) para mais detalhes.
 
-### 📄 License
+### 📄 Licença
 MIT
 
-This project is licensed under the [MIT License](LICENSE).
-
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
 
 
 ## 🚀 Começando
