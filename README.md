@@ -1,60 +1,51 @@
-# Projeto Vita-System - REDE PARA CAPTAÇÃO DE DADOS VINDOS DE VENTILADOR VITA  [VITA](https://github.com/orgs/systemVITA/repositories). ![VITA Logo](logo.png)
+# Project Vita-System - NETWORK FOR DATA CAPTURE FROM VITA VENTILATOR  [VITA](https://github.com/orgs/systemVITA/repositories). ![VITA Logo](logo.png)
 
-Projeto de uma rede para extração de dados de um Arduino Rev2 microcontrolador do ventilador VITA. sistema de controle e plataforma de recebimento de dados do VITA
-O Projeto VITA é uma iniciativa que visa desenvolver um sistema embarcado inovador para o monitoramento e controle de dispositivos médicos, utilizando tecnologias de Internet das Coisas (IoT) e integração de hardware e software. O objetivo central é permitir um acompanhamento eficiente de dispositivos médicos, fornecendo uma interface gráfica amigável para visualização em tempo real, além de comunicação segura com um banco de dados para análise posterior.
+Project of a network for data extraction from an Arduino Rev2 microcontroller of the VITA ventilator. VITA control system and data receiving platform
+The VITA Project is an initiative aimed at developing an innovative embedded system for monitoring and controlling medical devices, using Internet of Things (IoT) technologies and hardware and software integration. The central objective is to enable efficient monitoring of medical devices, providing a user-friendly graphical interface for real-time visualization, as well as secure communication with a database for subsequent analysis.
 
-## Características Principais
+## Key Features
 
-- Monitoramento em Tempo Real: Através da comunicação bidirecional entre o dispositivo médico e a interface web, os dados são apresentados em tempo real, possibilitando um acompanhamento preciso.
+- Real-Time Monitoring: Through bidirectional communication between the medical device and the web interface, data is presented in real-time, enabling precise monitoring.
 
-- Controle Remoto: O sistema permite o controle remoto do dispositivo médico por meio da interface gráfica, possibilitando ajustes em parâmetros e configurações.
+- Remote Control: The system allows remote control of the medical device through the graphical interface, enabling adjustments to parameters and settings.
 
-- Armazenamento de Dados: Os dados coletados são armazenados de forma segura em um banco de dados ou arquivo CSV, permitindo análises futuras e a geração de relatórios.
+- Data Storage: Collected data is securely stored in a database or CSV file, allowing for future analysis and report generation.
 
-- Tecnologias de Ponta: Utilização de protocolos MQTT e HTTP para a comunicação entre o hardware e a interface web, demonstrando o uso de tecnologias avançadas.
+- Cutting-Edge Technologies: Utilization of MQTT and HTTP protocols for communication between hardware and the web interface, demonstrating the use of advanced technologies.
 
-## Como Utilizar
+## How to Use
 
-1. **Instalação:**
-   - Clone este repositório em sua máquina local.
-   - Instale as dependências necessárias listadas no arquivo `requirements.txt`.
+1. **Installation:**
+   - Clone this repository to your local machine.
+   - Install the necessary dependencies listed in the `requirements.txt` file.
 
-2. **Configuração:**
-   - Siga as instruções na documentação do projeto para configurar o Access Point no Arduino Wi-Fi R2.
+2. **Configuration:**
+   - Follow the instructions in the project documentation to configure the Access Point on the Arduino Wi-Fi R2.
 
-3. **Execução:**
-   - Execute o servidor da interface gráfica executando o comando `python app.py`.
-   - Acesse a interface web no navegador utilizando o endereço `http://localhost:3000`.
+3. **Execution:**
+   - Run the graphical interface server by executing the command `python app.py`.
+   - Access the web interface in your browser using the address `http://localhost:3000`.
 
-4. **Utilização:**
-   - Visualize os dados em tempo real na interface gráfica.
-   - Faça ajustes e controle o dispositivo médico remotamente.
+4. **Usage:**
+   - View real-time data on the graphical interface.
+   - Make adjustments and remotely control the medical device.
 
-## Contribuição
+## Contribution
 
-Contribuições são bem-vindas! Se você encontrou algum bug ou tem alguma sugestão de melhoria, por favor, abra uma issue ou envie um pull request.
+Contributions are welcome! If you find any bugs or have any suggestions for improvement, please open an issue or submit a pull request.
 
-## Créditos
+## Credits
 
-Este projeto foi desenvolvido por Nerval Junior e faz parte de um trabalho acadêmico/pesquisa. Para mais informações, consulte os documentos e referências mencionados.
+This project was developed by Nerval Junior and is part of an academic/research work. For more information, refer to the mentioned documents and references.
 
 ### ⚡️ Backend
-- FastAPI para dados advindos do microcontrolador
-- typescript com express
-- mysql
-
+- FastAPI for data from the microcontroller
+- TypeScript with Express
+- MySQL
 
 ### 🎨 Frontend
--next.js
+- Next.js
 - React.js
-
-
-
-### 📄 License
-MIT
-
-Este projeto é licenciado sob a [Licença MIT](LICENSE).
-
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -97,15 +88,11 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+### 📄 License
+MIT
 
+This project is licensed under the [MIT License](LICENSE).
 
-
-## 📌 Planejamento
-[![Tracking_Rede_Vita_System]()]()
-
-
-## :computer: Modelo de Rede 
-![image]()
 
 
 ## 🚀 Começando
