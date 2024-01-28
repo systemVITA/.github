@@ -1,0 +1,3210 @@
+O Windows PowerShell
+Copyright (C) Microsoft Corporation. Todos os direitos reservados.
+
+Instale o PowerShell mais recente para obter novos recursos e aprimoramentos! https://aka.ms/PSWindows
+
+PS C:\Users\DELL> docker -v
+Docker version 24.0.6, build ed223bc
+PS C:\Users\DELL> docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+bce031bc522d: Pull complete
+cf7e9f463619: Pull complete
+105f403783c7: Pull complete
+878e53a613d8: Pull complete
+2a362044e79f: Pull complete
+6e4df4f73cfe: Pull complete
+69263d634755: Pull complete
+fe5e85549202: Pull complete
+5c02229ce6f1: Pull complete
+7320aa32bf42: Pull complete
+Digest: sha256:4ef30b2c11a3366d7bb9ad95c70c0782ae435df52d046553ed931621ea36ffa5
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview mysql
+PS C:\Users\DELL> docker pull postgress
+Using default tag: latest
+Error response from daemon: pull access denied for postgress, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+PS C:\Users\DELL> docker pull postgres
+Using default tag: latest
+latest: Pulling from library/postgres
+af107e978371: Pull complete
+85f7bca87921: Pull complete
+948f1cf08e62: Pull complete
+1a83ab26a0f0: Pull complete
+12bab27fafd3: Pull complete
+644cfda281a1: Pull complete
+03299695f2b9: Pull complete
+6e36bf1505f3: Pull complete
+a35465a6a76a: Pull complete
+83b026289c5c: Pull complete
+c158e73dda41: Pull complete
+264ae53c0064: Pull complete
+2e3c2c5fbb6d: Pull complete
+08c5357f23b5: Pull complete
+Digest: sha256:e2135391c55eb2ecabaaaeef4a9538bb8915c1980953fb6ce41a2d6d3e4b5695
+Status: Downloaded newer image for postgres:latest
+docker.io/library/postgres:latest
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview postgres
+PS C:\Users\DELL> docker run -p 3306:3306 --name mysql_vita -e MYSQL_ROOT_PASSWORD=root -d mysql
+dc6560418c883c474cf333588312218cf1cb05814a40f4af9dfbafc203c78b4c
+PS C:\Users\DELL> docker run --name mysql_vita -e POSTGRES_PASSWORD=root -d postgres
+docker: Error response from daemon: Conflict. The container name "/mysql_vita" is already in use by container "dc6560418c883c474cf333588312218cf1cb05814a40f4af9dfbafc203c78b4c". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+PS C:\Users\DELL> docker run --name postgres_vita -e POSTGRES_PASSWORD=root -d postgres
+dde316a4517bd1f5620ab24efd65e7714f36378d88119ce19b67d38cf68d550c
+PS C:\Users\DELL> docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED          STATUS          PORTS                                            NAMES
+dde316a4517b   postgres                   "docker-entrypoint.s…"   16 minutes ago   Up 16 minutes   5432/tcp                                         postgres_vita
+7654328e0176   eclipse-mosquitto:latest   "/docker-entrypoint.…"   25 hours ago     Up 19 minutes   0.0.0.0:1883->1883/tcp, 0.0.0.0:9001->9001/tcp   my_broker
+58131a200acb   api_node_docker-node       "docker-entrypoint.s…"   25 hours ago     Up 14 minutes   0.0.0.0:3033->3033/tcp                           my_node
+PS C:\Users\DELL> docker stop postgres
+Error response from daemon: No such container: postgres
+PS C:\Users\DELL> docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED          STATUS              PORTS                                            NAMES
+dde316a4517b   postgres                   "docker-entrypoint.s…"   19 minutes ago   Up 18 minutes       5432/tcp                                         postgres_vitadc6560418c88   mysql                      "docker-entrypoint.s…"   38 minutes ago   Up About a minute   0.0.0.0:3306->3306/tcp, 33060/tcp                mysql_vita
+7654328e0176   eclipse-mosquitto:latest   "/docker-entrypoint.…"   25 hours ago     Up 22 minutes       0.0.0.0:1883->1883/tcp, 0.0.0.0:9001->9001/tcp   my_broker
+58131a200acb   api_node_docker-node       "docker-entrypoint.s…"   25 hours ago     Up 16 minutes       0.0.0.0:3033->3033/tcp                           my_node
+PS C:\Users\DELL> docker stop postgres_vita
+postgres_vita
+PS C:\Users\DELL> docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED          STATUS          PORTS                                            NAMES
+dc6560418c88   mysql                      "docker-entrypoint.s…"   39 minutes ago   Up 2 minutes    0.0.0.0:3306->3306/tcp, 33060/tcp                mysql_vita
+7654328e0176   eclipse-mosquitto:latest   "/docker-entrypoint.…"   25 hours ago     Up 23 minutes   0.0.0.0:1883->1883/tcp, 0.0.0.0:9001->9001/tcp   my_broker
+58131a200acb   api_node_docker-node       "docker-entrypoint.s…"   25 hours ago     Up 17 minutes   0.0.0.0:3033->3033/tcp                           my_node
+PS C:\Users\DELL> docker stop mysql_vita
+mysql_vita
+PS C:\Users\DELL> docker stop my_broker
+my_broker
+PS C:\Users\DELL> docker stop my_node
+my_node
+PS C:\Users\DELL> docker run postgres_vita
+Unable to find image 'postgres_vita:latest' locally
+docker: Error response from daemon: pull access denied for postgres_vita, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+PS C:\Users\DELL> docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+PS C:\Users\DELL> docker ps -a
+CONTAINER ID   IMAGE                      COMMAND                  CREATED          STATUS                        PORTS                               NAMES
+dde316a4517b   postgres                   "docker-entrypoint.s…"   23 minutes ago   Exited (0) 3 minutes ago                                          postgres_vita
+dc6560418c88   mysql                      "docker-entrypoint.s…"   42 minutes ago   Up 36 seconds                 0.0.0.0:3306->3306/tcp, 33060/tcp   mysql_vita
+4947e29a174d   eclipse-mosquitto:latest   "/docker-entrypoint.…"   25 hours ago     Exited (1) 26 minutes ago                                         my_mqtt_pub
+7654328e0176   eclipse-mosquitto:latest   "/docker-entrypoint.…"   25 hours ago     Exited (0) 2 minutes ago                                          my_broker
+ceb3cd15d40a   mqtt_sub-my_python         "/bin/sh -c 'python …"   25 hours ago     Exited (2) 21 minutes ago                                         my_python
+77a24e312b45   eclipse-mosquitto          "/docker-entrypoint.…"   25 hours ago     Exited (3) 5 hours ago                                            mqtt5
+71382c096ba6   api_node_set-node          "docker-entrypoint.s…"   25 hours ago     Exited (137) 20 minutes ago                                       my_node_set
+455c806bdb4a   api_node-get-node          "docker-entrypoint.s…"   25 hours ago     Exited (137) 20 minutes ago                                       my_node_get
+58131a200acb   api_node_docker-node       "docker-entrypoint.s…"   25 hours ago     Exited (137) 2 minutes ago                                        my_node
+PS C:\Users\DELL> docker inspect dc6560418c88 | grep IPAddress
+grep : O termo 'grep' não é reconhecido como nome de cmdlet, função, arquivo de script ou programa operável. Verifique a grafia do nome ou, se um caminho tiver sido
+incluído, veja se o caminho está correto e tente novamente.
+No linha:1 caractere:31
++ docker inspect dc6560418c88 | grep IPAddress
++                               ~~~~
+    + CategoryInfo          : ObjectNotFound: (grep:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\DELL> docker inspect dc6560418c88 | Select-String -Pattern "IPAddress"
+>>
+
+            "SecondaryIPAddresses": null,
+            "IPAddress": "172.17.0.2",
+                    "IPAddress": "172.17.0.2",
+
+
+PS C:\Users\DELL> D:
+PS D:\> LS
+
+
+    Diretório: D:\
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        21/12/2023     16:24                1_UFMA
+d-----        18/12/2023     13:54                2_PESQUISAS
+d-----        18/12/2023     12:11                3_MONITORIAS
+d-----        18/12/2023     12:11                4_EXTENSÕES
+d-----        17/12/2023     18:45                5_CERTIFICADOS E DOCUMENTOS
+d-----        17/12/2023     18:45                6_CAPACITAÇÃO_IFMA
+d-----        17/12/2023     18:54                7_TCC_ECP
+d-----        02/01/2024     21:51                8_KIT_DEV
+d-----        17/12/2023     14:13                9_Rede_pion_sat
+d-----        03/01/2024     21:15                API
+d-----        17/12/2023     18:48                executaveis
+
+
+PS D:\> cd .\API\
+PS D:\API> code .
+PS D:\API> npm init -y
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Wrote to D:\API\package.json:
+
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+
+PS D:\API> npm add express
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+added 62 packages, and audited 63 packages in 6s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\API> npm add @prisma/client
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+added 1 package, and audited 64 packages in 9s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\API> npm add @types/express --D
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+added 12 packages, and audited 76 packages in 4s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\API> npm add @types/node -D
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+up to date, audited 76 packages in 1s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\API> npm add eslint -D
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+added 102 packages, and audited 178 packages in 11s
+
+34 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\API> npm add @typescript-eslint/eslint-plugin -D
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+added 39 packages, and audited 217 packages in 21s
+
+45 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\API> npm add @typescript-eslint/parser -D
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+up to date, audited 217 packages in 1s
+
+45 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\API> npm add @typescript -D
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+up to date, audited 217 packages in 969ms
+
+45 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\API> npm add ts-node-dev -D
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+added 42 packages, and audited 259 packages in 8s
+
+50 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\API> npm  add prisma -D
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+added 6 packages, and audited 265 packages in 19s
+
+50 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\API> npm tsc --init
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Unknown command: "tsc"
+
+To see a list of supported npm commands, run:
+  npm help
+PS D:\API> npx tsc --init
+>>
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+Created a new tsconfig.json with:
+                                                                                TS
+  target: es2016
+  module: commonjs
+  strict: true
+  esModuleInterop: true
+  skipLibCheck: true
+  forceConsistentCasingInFileNames: true
+
+
+You can learn more at https://aka.ms/tsconfig
+PS D:\API> npx eslint --init
+>>
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+You can also run this command directly using 'npm init @eslint/config'.
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Need to install the following packages:
+  @eslint/create-config
+Ok to proceed? (y) y
+√ How would you like to use ESLint? · style
+√ What type of modules does your project use? · esm
+√ Which framework does your project use? · none
+√ Does your project use TypeScript? · No / Yes
+√ Where does your code run? · browser
+√ How would you like to define a style for your project? · prompt
+√ What format do you want your config file to be in? · JSON
+√ What style of indentation do you use? · 4
+√ What quotes do you use for strings? · single
+√ What line endings do you use? · windows
+√ Do you require semicolons? · No / Yes
+The config that you've selected requires the following dependencies:
+
+@typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest
+√ Would you like to install them now? · No / Yes
+√ Which package manager do you want to use? · npm
+Installing @typescript-eslint/eslint-plugin@latest, @typescript-eslint/parser@latest
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+up to date, audited 265 packages in 3s
+
+50 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+Successfully created .eslintrc.json file in D:\API
+PS D:\API> mkdir src
+
+
+    Diretório: D:\API
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        03/01/2024     21:31                src
+
+
+PS D:\API> cd src
+PS D:\API\src> touch server.ts
+touch : O termo 'touch' não é reconhecido como nome de cmdlet, função, arquivo de
+script ou programa operável. Verifique a grafia do nome ou, se um caminho tiver
+sido incluído, veja se o caminho está correto e tente novamente.
+No linha:1 caractere:1
++ touch server.ts
++ ~~~~~
+    + CategoryInfo          : ObjectNotFound: (touch:String) [], CommandNotFoundE
+   xception
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS D:\API\src> npm dev
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Unknown command: "dev"
+
+Did you mean this?
+    npm run dev # run the "dev" package script
+
+To see a list of supported npm commands, run:
+  npm help
+PS D:\API\src> cd ..
+PS D:\API> cd ..
+PS D:\> cd .\API\
+PS D:\API> npm dev
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Unknown command: "dev"
+
+Did you mean this?
+    npm run dev # run the "dev" package script
+
+To see a list of supported npm commands, run:
+  npm help
+PS D:\API> npm run dev
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+> api@1.0.0 dev
+> ts-node-dev ./src/server.ts
+
+[INFO] 21:43:06 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.3.3)
+server rodando na porta 8000
+Deseja finalizar o arquivo em lotes (S/N)?
+^C
+PS D:\API> npx prisma init
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+✔ Your Prisma schema was created at prisma/schema.prisma
+  You can now open it in your favorite editor.
+
+Next steps:
+1. Set the DATABASE_URL in the .env file to point to your existing database. If your database has no tables yet, read https://pris.ly/d/getting-started
+2. Set the provider of the datasource block in schema.prisma to match your database: postgresql, mysql, sqlite, sqlserver, mongodb or cockroachdb.
+3. Run prisma db pull to turn your database schema into a Prisma schema.
+4. Run prisma generate to generate the Prisma Client. You can then start querying your database.
+
+More information in our documentation:
+https://pris.ly/d/getting-started
+
+PS D:\API> docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS          PORTS                               NAMES
+dc6560418c88   mysql     "docker-entrypoint.s…"   About an hour ago   Up 35 minutes   0.0.0.0:3306->3306/tcp, 33060/tcp   mysql_vita
+PS D:\API> npx prisma migrate dev
+>>
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": MySQL database "mysql_vita" at "172.17.0.2:3306"
+
+Error: P1001: Can't reach database server at `172.17.0.2`:`3306`
+
+Please make sure your database server is running at `172.17.0.2`:`3306`.
+PS D:\API> docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS          PORTS                               NAMES
+dc6560418c88   mysql     "docker-entrypoint.s…"   About an hour ago   Up 40 minutes   0.0.0.0:3306->3306/tcp, 33060/tcp   mysql_vita
+PS D:\API> docker inspect dc6560418c88 | Select-String -Pattern "IPAddress"
+>>
+
+            "SecondaryIPAddresses": null,
+            "IPAddress": "172.17.0.2",
+                    "IPAddress": "172.17.0.2",
+
+
+PS D:\API> npx prisma migrate dev
+>>
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": MySQL database "mysql_vita" at "localhost:3306"
+
+MySQL database mysql_vita created at localhost:3306
+
+√ Enter a name for the new migration: ... create_table_users
+Applying migration `20240104005603_create_table_users`
+
+The following migration(s) have been created and applied from new schema changes:
+
+migrations/
+  └─ 20240104005603_create_table_users/
+    └─ migration.sql
+
+Your database is now in sync with your schema.
+
+✔ Generated Prisma Client (v5.7.1) to .\node_modules\@prisma\client in 84ms
+
+
+PS D:\API> npx prisma migrate dev
+>>
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": MySQL database "mysql_vita" at "localhost:3306"
+
+
+Error: Prisma schema validation - (validate wasm)
+Error code: P1012
+error: Type "Post" is neither a built-in type, nor refers to another model, custom type, or enum.
+  -->  schema.prisma:17
+   |
+16 |   email String @unique
+17 |   Post Post[]
+   |
+
+Validation Error Count: 1
+[Context: validate]
+
+Prisma CLI Version : 5.7.1
+PS D:\API> npx prisma migrate dev
+>>
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": MySQL database "mysql_vita" at "localhost:3306"
+
+
+Error: Prisma schema validation - (validate wasm)
+Error code: P1012
+error: Native type Varchar is not supported for mysql connector.
+  -->  schema.prisma:25
+   |
+24 |   title String?
+25 |   content String @db.Varchar(255)
+   |
+
+Validation Error Count: 1
+[Context: validate]
+
+Prisma CLI Version : 5.7.1
+PS D:\API> npx prisma migrate dev
+>>
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": MySQL database "mysql_vita" at "localhost:3306"
+
+√ Enter a name for the new migration: ... create_table_dados
+Applying migration `20240104010644_create_table_dados`
+
+The following migration(s) have been created and applied from new schema changes:
+
+migrations/
+  └─ 20240104010644_create_table_dados/
+    └─ migration.sql
+
+Your database is now in sync with your schema.
+
+✔ Generated Prisma Client (v5.7.1) to .\node_modules\@prisma\client in 68ms
+
+
+PS D:\API> npm run dev
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+> api@1.0.0 dev
+> ts-node-dev ./src/server.ts
+
+[INFO] 23:15:53 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.3.3)
+Compilation error in D:\API\src\controllers\Usercontrollers.ts
+[ERROR] 23:15:55 ⨯ Unable to compile TypeScript:
+src/controllers/Usercontrollers.ts(31,40): error TS18046: 'error' is of type 'unknown'.
+
+[INFO] 23:16:30 Restarting: D:\API\src\controllers\Usercontrollers.ts has been modified
+server rodando na porta 8000
+[INFO] 23:16:39 Restarting: D:\API\src\controllers\Usercontrollers.ts has been modified
+server rodando na porta 8000
+[INFO] 23:16:43 Restarting: D:\API\src\controllers\Usercontrollers.ts has been modified
+Compilation error in D:\API\src\controllers\Usercontrollers.ts
+[ERROR] 23:16:43 ⨯ Unable to compile TypeScript:
+src/controllers/Usercontrollers.ts(31,40): error TS18046: 'error' is of type 'unknown'.
+
+[INFO] 23:16:46 Restarting: D:\API\src\controllers\Usercontrollers.ts has been modified
+server rodando na porta 8000
+[INFO] 23:16:48 Restarting: D:\API\src\controllers\Usercontrollers.ts has been modified
+server rodando na porta 8000
+[INFO] 23:20:18 Restarting: D:\API\src\controllers\Usercontrollers.ts has been modified
+Deseja finalizar o arquivo em lotes (S/N)?
+^C
+PS D:\API> ls
+ls : Não é possível localizar o caminho 'D:\API' porque ele não existe.
+No linha:1 caractere:1
++ ls
++ ~~
+    + CategoryInfo          : ObjectNotFound: (D:\API:String) [Get-ChildItem], It
+   emNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetChild
+   ItemCommand
+
+PS D:\API> cd ..
+PS D:\> cd .\VITA_REFATORING\
+PS D:\VITA_REFATORING> npx create-next-app vita-system-frontend
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+√ Would you like to use TypeScript? ... No / Yes
+√ Would you like to use ESLint? ... No / Yes
+√ Would you like to use Tailwind CSS? ... No / Yes
+√ Would you like to use `src/` directory? ... No / Yes
+√ Would you like to use App Router? (recommended) ... No / Yes
+√ Would you like to customize the default import alias (@/*)? ... No / Yes
+Creating a new Next.js app in D:\VITA_REFATORING\vita-system-frontend.
+
+Using npm.
+
+Initializing project with template: app-tw
+
+
+Installing dependencies:
+- react
+- react-dom
+- next
+
+Installing devDependencies:
+- typescript
+- @types/node
+- @types/react
+- @types/react-dom
+- autoprefixer
+- postcss
+- tailwindcss
+- eslint
+- eslint-config-next
+
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'next@14.0.4',
+npm WARN EBADENGINE   required: { node: '>=18.17.0' },
+npm WARN EBADENGINE   current: { node: 'v16.16.0', npm: '8.11.0' }
+npm WARN EBADENGINE }
+Deseja finalizar o arquivo em lotes (S/N)? [#################.] - reify:postcss: ht[#################.] - reify:postcss: http fetch GET 200 https://registry.npmjs.or
+PS D:\VITA_REFATORING> ^C
+PS D:\VITA_REFATORING> ^C
+PS D:\VITA_REFATORING> npx create-next-app vita-system-frontend
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+√ Would you like to use TypeScript? ... No / Yes
+√ Would you like to use ESLint? ... No / Yes
+√ Would you like to use Tailwind CSS? ... No / Yes
+√ Would you like to use `src/` directory? ... No / Yes
+√ Would you like to use App Router? (recommended) ... No / Yes
+√ Would you like to customize the default import alias (@/*)? ... No / Yes
+Creating a new Next.js app in D:\VITA_REFATORING\vita-system-frontend.
+
+Using npm.
+
+Initializing project with template: default-tw
+
+
+Installing dependencies:
+- react
+- react-dom
+- next
+
+Installing devDependencies:
+- typescript
+- @types/node
+- @types/react
+- @types/react-dom
+- autoprefixer
+- postcss
+- tailwindcss
+- eslint
+- eslint-config-next
+
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'next@14.0.4',
+npm WARN EBADENGINE   required: { node: '>=18.17.0' },
+npm WARN EBADENGINE   current: { node: 'v16.16.0', npm: '8.11.0' }
+npm WARN EBADENGINE }
+
+added 361 packages, and audited 362 packages in 27s
+
+128 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+Initialized a git repository.
+
+Success! Created vita-system-frontend at D:\VITA_REFATORING\vita-system-frontend
+
+PS D:\VITA_REFATORING> cd .\vita-system-frontend\
+PS D:\VITA_REFATORING\vita-system-frontend> code .
+PS D:\VITA_REFATORING\vita-system-frontend> npm run dev
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+> vita-system-frontend@0.1.0 dev
+> next dev
+
+You are using Node.js 16.16.0. For Next.js, Node.js version >= v18.17.0 is required.
+PS D:\VITA_REFATORING\vita-system-frontend> npx dev
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Need to install the following packages:
+  dev
+Ok to proceed? (y) y
+npm ERR! code EBADPLATFORM
+npm ERR! notsup Unsupported platform for inotify@1.4.6: wanted {"os":"linux"} (current: {"os":"win32","arch":"x64"})
+npm ERR! notsup Valid OS:    linux
+npm ERR! notsup Valid Arch:  undefined
+npm ERR! notsup Actual OS:   win32
+npm ERR! notsup Actual Arch: x64
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\DELL\AppData\Local\npm-cache\_logs\2024-01-04T02_57_06_018Z-debug-0.log
+PS D:\VITA_REFATORING\vita-system-frontend> npm run
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+Lifecycle scripts included in vita-system-frontend@0.1.0:
+  start
+    next start
+
+available via `npm run-script`:
+  dev
+    next dev
+  build
+    next build
+  lint
+    next lint
+
+PS D:\VITA_REFATORING\vita-system-frontend> npm run dev
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+> vita-system-frontend@0.1.0 dev
+> next dev
+
+You are using Node.js 16.16.0. For Next.js, Node.js version >= v18.17.0 is required.
+PS D:\VITA_REFATORING\vita-system-frontend> next dev
+next : O termo 'next' não é reconhecido como nome de cmdlet, função, arquivo de
+script ou programa operável. Verifique a grafia do nome ou, se um caminho tiver
+sido incluído, veja se o caminho está correto e tente novamente.
+No linha:1 caractere:1
++ next dev
++ ~~~~
+    + CategoryInfo          : ObjectNotFound: (next:String) [], CommandNotFoundEx
+   ception
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS D:\VITA_REFATORING\vita-system-frontend> yarn dev
+yarn run v1.22.19
+$ next dev
+You are using Node.js 16.16.0. For Next.js, Node.js version >= v18.17.0 is required.
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+PS D:\VITA_REFATORING\vita-system-frontend> next dev
+next : O termo 'next' não é reconhecido como nome de cmdlet, função, arquivo de
+script ou programa operável. Verifique a grafia do nome ou, se um caminho tiver
+sido incluído, veja se o caminho está correto e tente novamente.
+No linha:1 caractere:1
++ next dev
++ ~~~~
+    + CategoryInfo          : ObjectNotFound: (next:String) [], CommandNotFoundEx
+   ception
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS D:\VITA_REFATORING\vita-system-frontend> npm run dev
+>>
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+> vita-system-frontend@0.1.0 dev
+> next dev
+
+You are using Node.js 16.16.0. For Next.js, Node.js version >= v18.17.0 is required.
+PS D:\VITA_REFATORING\vita-system-frontend> nvm install node
+>>
+nvm : O termo 'nvm' não é reconhecido como nome de cmdlet, função, arquivo de
+script ou programa operável. Verifique a grafia do nome ou, se um caminho tiver
+sido incluído, veja se o caminho está correto e tente novamente.
+No linha:1 caractere:1
++ nvm install node
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (nvm:String) [], CommandNotFoundExc
+   eption
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS D:\VITA_REFATORING\vita-system-frontend> nvm -v
+nvm : O termo 'nvm' não é reconhecido como nome de cmdlet, função, arquivo de
+script ou programa operável. Verifique a grafia do nome ou, se um caminho tiver
+sido incluído, veja se o caminho está correto e tente novamente.
+No linha:1 caractere:1
++ nvm -v
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (nvm:String) [], CommandNotFoundExc
+   eption
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS D:\VITA_REFATORING\vita-system-frontend> nvm -v
+nvm : O termo 'nvm' não é reconhecido como nome de cmdlet, função, arquivo de
+script ou programa operável. Verifique a grafia do nome ou, se um caminho tiver
+sido incluído, veja se o caminho está correto e tente novamente.
+No linha:1 caractere:1
++ nvm -v
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (nvm:String) [], CommandNotFoundExc
+   eption
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS D:\VITA_REFATORING\vita-system-frontend> nvm -version
+nvm : O termo 'nvm' não é reconhecido como nome de cmdlet, função, arquivo de
+script ou programa operável. Verifique a grafia do nome ou, se um caminho tiver
+sido incluído, veja se o caminho está correto e tente novamente.
+No linha:1 caractere:1
++ nvm -version
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (nvm:String) [], CommandNotFoundExc
+   eption
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS D:\VITA_REFATORING\vita-system-frontend> npm run dev
+
+> vita-system-frontend@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.0.4
+   - Local:        http://localhost:3000
+
+ ✓ Ready in 12.1s
+ ○ Compiling / ...
+(node:26108) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+The user aborted a request.
+
+Retrying 1/3...
+ ✓ Compiled / in 14.6s (230 modules)
+ ✓ Compiled in 271ms (230 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Parenthesized expression cannot be empty
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:4:1]
+  4 │     const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │     export default function Home() {
+  7 │ ╭─▶   return (
+  8 │ │
+  9 │ ╰─▶   )
+ 10 │     }
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 643ms (204 modules)
+ ✓ Compiled in 247ms (204 modules)
+ ✓ Compiled in 300ms (204 modules)
+ ✓ Compiled in 224ms (204 modules)
+ ✓ Compiled in 230ms (204 modules)
+ ✓ Compiled in 323ms (204 modules)
+ ✓ Compiled in 130ms (204 modules)
+ ✓ Compiled in 168ms (204 modules)
+ ✓ Compiled in 179ms (204 modules)
+ ✓ Compiled in 171ms (204 modules)
+ ✓ Compiled in 124ms (204 modules)
+ ✓ Compiled in 80ms (204 modules)
+
+warn - No utility classes were detected in your source files. If this is unexpected, double-check the `content` option in your Tailwind CSS configuration.
+warn - https://tailwindcss.com/docs/content-configuration
+ ✓ Compiled in 353ms (204 modules)
+ ✓ Compiled in 91ms (151 modules)
+ ✓ Compiled in 455ms (204 modules)
+ ⨯ ./src/styles/globals.css:8:13
+Syntax error: D:\VITA_REFATORING\vita-system-frontend\src\styles\globals.css Unclosed bracket
+
+   6 |
+   7 | body {
+>  8 |   color: rgb(var(--foreground-rgb)
+     |             ^
+   9 | }
+  10 |
+ ✓ Compiled in 330ms (204 modules)
+ ✓ Compiled in 50ms (151 modules)
+ ⨯ ./src/styles/globals.css:8:3
+Syntax error: D:\VITA_REFATORING\vita-system-frontend\src\styles\globals.css Unknown word
+
+   6 |
+   7 | body {
+>  8 |   bg
+     |   ^
+   9 | }
+  10 |
+ ✓ Compiled in 251ms (204 modules)
+ ✓ Compiled in 40ms (151 modules)
+ ⨯ ./src/styles/globals.css:8:3
+Syntax error: D:\VITA_REFATORING\vita-system-frontend\src\styles\globals.css Unknown word
+
+   6 |
+   7 | body {
+>  8 |   bg-
+     |   ^
+   9 | }
+  10 |
+ ⨯ ./src/styles/globals.css:8:3
+Syntax error: D:\VITA_REFATORING\vita-system-frontend\src\styles\globals.css Unknown word
+
+   6 |
+   7 | body {
+>  8 |   bg-gra
+     |   ^
+   9 | }
+  10 |
+ ⨯ ./src/styles/globals.css:8:3
+Syntax error: D:\VITA_REFATORING\vita-system-frontend\src\styles\globals.css Unknown word
+
+   6 |
+   7 | body {
+>  8 |   bg-gray
+     |   ^
+   9 | }
+  10 |
+ ⨯ ./src/styles/globals.css:8:3
+Syntax error: D:\VITA_REFATORING\vita-system-frontend\src\styles\globals.css Unknown word
+
+   6 |
+   7 | body {
+>  8 |   bg-gray-950
+     |   ^
+   9 | }
+  10 |
+ ⨯ ./src/styles/globals.css:9:3
+Syntax error: D:\VITA_REFATORING\vita-system-frontend\src\styles\globals.css Unknown word
+
+   7 | body {
+   8 |
+>  9 |   bg-gray-950
+     |   ^
+  10 | }
+  11 |
+ ✓ Compiled in 448ms (204 modules)
+ ✓ Compiled in 70ms (151 modules)
+ ✓ Compiled in 196ms (204 modules)
+ ✓ Compiled in 198ms (204 modules)
+ ✓ Compiled in 354ms (204 modules)
+ ⨯ ./src/styles/globals.css:8:3
+Syntax error: D:\VITA_REFATORING\vita-system-frontend\src\styles\globals.css The `text` class does not exist. If `text` is a custom class, make sure it is defined within a `@layer` directive.
+
+   6 |
+   7 | body {
+>  8 |   @apply
+     |   ^
+   9 |   bg-gray-950
+  10 |   text
+ ⨯ ./src/styles/globals.css:8:3
+Syntax error: D:\VITA_REFATORING\vita-system-frontend\src\styles\globals.css The `text-gray` class does not exist. If `text-gray` is a custom class, make sure it is defined within a `@layer` directive.
+
+   6 |
+   7 | body {
+>  8 |   @apply
+     |   ^
+   9 |   bg-gray-950
+  10 |   text-gray
+ ✓ Compiled in 392ms (204 modules)
+ ✓ Compiled in 830ms (204 modules)
+ ✓ Compiled in 386ms (230 modules)
+ ✓ Compiled in 179ms (230 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × 'import', and 'export' cannot be used outside of module code
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:14:1]
+ 14 │   const { mode } = useContext(WindmillContext)
+ 15 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+ 16 │
+ 17 │ export default function Home() {
+    · ──────
+ 18 │   return (
+ 19 │     <section>
+ 20 │       <h2>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+  1 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── previous definition of `Image` here
+  2 │ import { Inter } from 'next/font/google'
+  3 │
+  4 │ const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │ import React, { useContext } from 'react'
+  7 │ import Link from 'next/link'
+  8 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── `Image` redefined here
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from 'icons'
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+  1 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── previous definition of `Image` here
+  2 │ import { Inter } from 'next/font/google'
+  3 │
+  4 │ const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │ import React, { useContext } from 'react'
+  7 │ import Link from 'next/link'
+  8 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── `Image` redefined here
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from 'icons'
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+  1 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── previous definition of `Image` here
+  2 │ import { Inter } from 'next/font/google'
+  3 │
+  4 │ const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │ import React, { useContext } from 'react'
+  7 │ import Link from 'next/link'
+  8 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── `Image` redefined here
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from 'icons'
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+  1 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── previous definition of `Image` here
+  2 │ import { Inter } from 'next/font/google'
+  3 │
+  4 │ const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │ import React, { useContext } from 'react'
+  7 │ import Link from 'next/link'
+  8 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── `Image` redefined here
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from 'PUicons'
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+  1 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── previous definition of `Image` here
+  2 │ import { Inter } from 'next/font/google'
+  3 │
+  4 │ const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │ import React, { useContext } from 'react'
+  7 │ import Link from 'next/link'
+  8 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── `Image` redefined here
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from 'icons'
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+  1 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── previous definition of `Image` here
+  2 │ import { Inter } from 'next/font/google'
+  3 │
+  4 │ const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │ import React, { useContext } from 'react'
+  7 │ import Link from 'next/link'
+  8 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── `Image` redefined here
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from 'piicons'
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+  1 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── previous definition of `Image` here
+  2 │ import { Inter } from 'next/font/google'
+  3 │
+  4 │ const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │ import React, { useContext } from 'react'
+  7 │ import Link from 'next/link'
+  8 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── `Image` redefined here
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from 'puicons'
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+  1 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── previous definition of `Image` here
+  2 │ import { Inter } from 'next/font/google'
+  3 │
+  4 │ const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │ import React, { useContext } from 'react'
+  7 │ import Link from 'next/link'
+  8 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── `Image` redefined here
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from 'publicicons'
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+  1 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── previous definition of `Image` here
+  2 │ import { Inter } from 'next/font/google'
+  3 │
+  4 │ const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │ import React, { useContext } from 'react'
+  7 │ import Link from 'next/link'
+  8 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── `Image` redefined here
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from 'public/icons'
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unterminated string constant
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:8:1]
+  8 │ import Image from 'next/image'
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from '
+    ·                                         ─
+ 12 │
+ 13 │
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `export`. Expected a string literal
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:12:1]
+ 12 │
+ 13 │
+ 14 │
+ 15 │ export default function Home() {
+    · ──────
+ 16 │   const { mode } = useContext(WindmillContext)
+ 17 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `i`. Expected a string literal
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:8:1]
+  8 │ import Image from 'next/image'
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from i
+    ·                                         ─
+ 12 │
+ 13 │
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `export`. Expected a string literal
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:12:1]
+ 12 │
+ 13 │
+ 14 │
+ 15 │ export default function Home() {
+    · ──────
+ 16 │   const { mode } = useContext(WindmillContext)
+ 17 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `< (jsx tag start)`. Expected identifier or string
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:8:1]
+  8 │ import Image from 'next/image'
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, <TwitterIcon></TwitterIcon>
+    ·                      ─
+ 12 │
+ 13 │
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected ',', got 'export'
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:12:1]
+ 12 │
+ 13 │
+ 14 │
+ 15 │ export default function Home() {
+    · ──────
+ 16 │   const { mode } = useContext(WindmillContext)
+ 17 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+  1 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── previous definition of `Image` here
+  2 │ import { Inter } from 'next/font/google'
+  3 │
+  4 │ const inter = Inter({ subsets: ['latin'] })
+  5 │
+  6 │ import React, { useContext } from 'react'
+  7 │ import Link from 'next/link'
+  8 │ import Image from 'next/image'
+    ·        ──┬──
+    ·          ╰── `Image` redefined here
+  9 │
+ 10 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 11 │ import { GithubIcon, TwitterIcon } from 'icons'
+    ╰────
+ ⨯ ./src/pages/index.tsx:9:0
+Module not found: Can't resolve '@roketid/windmill-react-ui'
+   7 | import Link from 'next/link'
+   8 |
+>  9 | import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  10 | import { GithubIcon, TwitterIcon } from 'icons'
+  11 |
+  12 |
+
+https://nextjs.org/docs/messages/module-not-found
+ ✓ Compiled in 196ms (204 modules)
+ ✓ Compiled in 187ms (204 modules)
+ ⨯ ./src/pages/index.tsx:5:0
+Module not found: Can't resolve '@roketid/windmill-react-ui'
+  3 | import Image from 'next/image';
+  4 |
+> 5 | import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui';
+  6 | import { GithubIcon, TwitterIcon } from 'icons';
+  7 |
+  8 | const LoginPage: React.FC = () => {
+
+https://nextjs.org/docs/messages/module-not-found
+ ✓ Compiled in 143ms (204 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Image` is defined multiple times
+   ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+ 1 │ import Image from 'next/image'
+   ·        ──┬──
+   ·          ╰── previous definition of `Image` here
+ 2 │ import { Inter } from 'next/font/google'
+ 3 │ import React, { useContext } from 'react'
+ 4 │ import Link from 'next/link'
+ 5 │ import Image from 'next/image'
+   ·        ──┬──
+   ·          ╰── `Image` redefined here
+ 6 │
+ 7 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+ 8 │ import { GithubIcon, TwitterIcon } from 'icons'
+   ╰────
+ ✓ Compiled in 148ms (204 modules)
+ ⨯ ./src/pages/index.tsx:6:0
+Module not found: Can't resolve '@roketid/windmill-react-ui'
+  4 | import Link from 'next/link'
+  5 |
+> 6 | import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 | import { GithubIcon, TwitterIcon } from 'icons'
+  8 |
+  9 |
+
+https://nextjs.org/docs/messages/module-not-found
+ ⨯ ./src/pages/index.tsx:6:0
+Module not found: Can't resolve '@roketid/windmill-react-ui'
+  4 | import Link from 'next/link'
+  5 |
+> 6 | import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 | import { GithubIcon, TwitterIcon } from 'icons'
+  8 |
+  9 |
+
+https://nextjs.org/docs/messages/module-not-found
+ ⨯ ./src/pages/index.tsx:6:0
+Module not found: Can't resolve '@roketid/windmill-react-ui'
+  4 | import Link from 'next/link'
+  5 |
+> 6 | import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 | import { GithubIcon, TwitterIcon } from 'icons'
+  8 |
+  9 |
+
+https://nextjs.org/docs/messages/module-not-found
+ ⨯ ./src/pages/index.tsx:6:0
+Module not found: Can't resolve '@roketid/windmill-react-ui'
+  4 | import Link from 'next/link'
+  5 |
+> 6 | import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 | import { GithubIcon, TwitterIcon } from 'icons'
+  8 |
+  9 |
+
+https://nextjs.org/docs/messages/module-not-found
+
+Deseja finalizar o arquivo em lotes (S/N)?
+^C
+PS D:\VITA_REFATORING\vita-system-frontend> npm install @roketid/windmill-react-ui
+>>
+npm WARN ERESOLVE overriding peer dependency
+
+added 19 packages, and audited 381 packages in 9s
+
+128 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\VITA_REFATORING\vita-system-frontend> npm run dev
+
+> vita-system-frontend@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.0.4
+   - Local:        http://localhost:3000
+
+ ✓ Ready in 5.1s
+ ○ Compiling / ...
+(node:18744) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ ⨯ ./src/pages/index.tsx:7:0
+Module not found: Can't resolve 'icons'
+   5 |
+   6 | import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+>  7 | import { GithubIcon, TwitterIcon } from 'icons'
+   8 |
+   9 |
+  10 | const inter = Inter({ subsets: ['latin'] })
+
+https://nextjs.org/docs/messages/module-not-found
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'D:\VITA_REFATORING\vita-system-frontend\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'D:\VITA_REFATORING\vita-system-frontend\.next\cache\webpack\client-development-fallback\0.pack.gz'
+
+Deseja finalizar o arquivo em lotes (S/N)?
+^C
+PS D:\VITA_REFATORING\vita-system-frontend> ^C
+PS D:\VITA_REFATORING\vita-system-frontend> ^C
+PS D:\VITA_REFATORING\vita-system-frontend> npm install icons
+npm WARN ERESOLVE overriding peer dependency
+npm WARN While resolving: react-focus-lock@2.4.1
+npm WARN Found: react@18.2.0
+npm WARN node_modules/react
+npm WARN   peer react@">=16.8.0" from @roketid/windmill-react-ui@0.1.1
+npm WARN   node_modules/@roketid/windmill-react-ui
+npm WARN     @roketid/windmill-react-ui@"^0.1.1" from the root project
+npm WARN   8 more (next, react-clientside-effect, react-dom, ...)
+npm WARN
+npm WARN Could not resolve dependency:
+npm WARN peer react@"^16.8.0" from react-focus-lock@2.4.1
+npm WARN node_modules/@roketid/windmill-react-ui/node_modules/react-focus-lock
+npm WARN   react-focus-lock@"2.4.1" from @roketid/windmill-react-ui@0.1.1
+npm WARN   node_modules/@roketid/windmill-react-ui
+npm WARN
+npm WARN Conflicting peer dependency: react@16.14.0
+npm WARN node_modules/react
+npm WARN   peer react@"^16.8.0" from react-focus-lock@2.4.1
+npm WARN   node_modules/@roketid/windmill-react-ui/node_modules/react-focus-lock
+npm WARN     react-focus-lock@"2.4.1" from @roketid/windmill-react-ui@0.1.1
+npm WARN     node_modules/@roketid/windmill-react-ui
+npm WARN deprecated icons@1.0.0: Package no longer supported. Contact support@npmjs.com for more info.
+
+added 1 package, and audited 382 packages in 3s
+
+128 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\VITA_REFATORING\vita-system-frontend> npm run dev
+
+> vita-system-frontend@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.0.4
+   - Local:        http://localhost:3000
+
+ ✓ Ready in 5.9s
+ ○ Compiling / ...
+(node:23536) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ ⨯ ./src/pages/index.tsx:7:0
+Module not found: Can't resolve 'icons'
+   5 |
+   6 | import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+>  7 | import { GithubIcon, TwitterIcon } from 'icons'
+   8 |
+   9 |
+  10 | const inter = Inter({ subsets: ['latin'] })
+
+https://nextjs.org/docs/messages/module-not-found
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'D:\VITA_REFATORING\vita-system-frontend\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'D:\VITA_REFATORING\vita-system-frontend\.next\cache\webpack\client-development-fallback\0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'D:\VITA_REFATORING\vita-system-frontend\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'D:\VITA_REFATORING\vita-system-frontend\.next\cache\webpack\client-development-fallback\0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'D:\VITA_REFATORING\vita-system-frontend\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'D:\VITA_REFATORING\vita-system-frontend\.next\cache\webpack\client-development-fallback\0.pack.gz'
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected ';', '}' or <eof>
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:4:1]
+  4 │ import Link from 'next/link'
+  5 │
+  6 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 │ #import { GithubIcon, TwitterIcon } from 'icons'
+    · ───┬─── ─
+    ·    ╰── This is the expression part of an expression statement
+  8 │
+  9 │
+ 10 │ const inter = Inter({ subsets: ['latin'] })
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled / in 391ms (263 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ReferenceError: GithubIcon is not defined
+    at Home (webpack-internal:///./src/pages/index.tsx:140:121)
+    at renderWithHooks (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5658:16)
+    at renderIndeterminateComponent (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5731:15)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5946:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderIndeterminateComponent (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5785:7)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5946:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5971:9)
+ ⨯ src\pages\index.tsx (63:17) @ GithubIcon
+ ⨯ ReferenceError: GithubIcon is not defined
+    at Home (webpack-internal:///./src/pages/index.tsx:140:121)
+    at renderWithHooks (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5658:16)
+    at renderIndeterminateComponent (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5731:15)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5946:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderIndeterminateComponent (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5785:7)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5946:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5971:9) {
+  page: '/'
+}
+  61 |
+  62 |               <Button block layout='outline'>
+> 63 |                 <GithubIcon className='w-4 h-4 mr-2' aria-hidden='true' />
+     |                 ^
+  64 |                 Github
+  65 |               </Button>
+  66 |               <Button className='mt-4' block layout='outline'>
+ ⨯ ./src/pages/index.tsx:7:0
+Module not found: Can't resolve 'icons'
+   5 |
+   6 | import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+>  7 | import { GithubIcon, TwitterIcon } from 'icons'
+   8 |
+   9 |
+  10 | const inter = Inter({ subsets: ['latin'] })
+
+https://nextjs.org/docs/messages/module-not-found
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected 'from', got 'const'
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:9:1]
+  9 │ import
+ 10 │
+ 11 │
+ 12 │ const inter = Inter({ subsets: ['latin'] })
+    · ─────
+ 13 │
+ 14 │ export default function Home() {
+ 15 │   const { mode } = useContext(WindmillContext)
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected ',', got 'const'
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:9:1]
+  9 │ import git
+ 10 │
+ 11 │
+ 12 │ const inter = Inter({ subsets: ['latin'] })
+    · ─────
+ 13 │
+ 14 │ export default function Home() {
+ 15 │   const { mode } = useContext(WindmillContext)
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `GithubIcon` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:4:1]
+  4 │ import Link from 'next/link'
+  5 │
+  6 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 │ import { GithubIcon, TwitterIcon } from 'icons'
+    ·          ─────┬────
+    ·               ╰── previous definition of `GithubIcon` here
+  8 │
+  9 │ import { GithubIcon } from '../../icons'
+    ·          ─────┬────
+    ·               ╰── `GithubIcon` redefined here
+ 10 │
+ 11 │
+ 12 │ const inter = Inter({ subsets: ['latin'] })
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `GithubIcon` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:4:1]
+  4 │ import Link from 'next/link'
+  5 │
+  6 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 │ import { GithubIcon,  } from 'icons'
+    ·          ─────┬────
+    ·               ╰── previous definition of `GithubIcon` here
+  8 │
+  9 │ import { GithubIcon } from '../../icons'
+    ·          ─────┬────
+    ·               ╰── `GithubIcon` redefined here
+ 10 │
+ 11 │
+ 12 │ const inter = Inter({ subsets: ['latin'] })
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `GithubIcon` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:4:1]
+  4 │ import Link from 'next/link'
+  5 │
+  6 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 │ import { GithubIcon,  } from 'icons'
+    ·          ─────┬────
+    ·               ╰── previous definition of `GithubIcon` here
+  8 │
+  9 │ import { GithubIcon,TwitterIcon } from '../../icons'
+    ·          ─────┬────
+    ·               ╰── `GithubIcon` redefined here
+ 10 │
+ 11 │
+ 12 │ const inter = Inter({ subsets: ['latin'] })
+    ╰────
+ ✓ Compiled in 1331ms (321 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `Inter` is defined multiple times
+   ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+ 1 │ import Image from 'next/image'
+ 2 │ import { Inter } from 'next/font/google'
+   ·          ──┬──
+   ·            ╰── previous definition of `Inter` here
+ 3 │ import { Inter } from 'react-inter'
+   ·          ──┬──
+   ·            ╰── `Inter` redefined here
+ 4 │
+ 5 │ import React, { useContext } from 'react'
+ 6 │ import Link from 'next/link'
+   ╰────
+
+  × Font loaders must be called and assigned to a const in the module scope
+   ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:1:1]
+ 1 │ import Image from 'next/image'
+ 2 │ import { Inter } from 'next/font/google'
+ 3 │ import { Inter } from 'react-inter'
+   ·          ─────
+ 4 │
+ 5 │ import React, { useContext } from 'react'
+ 6 │ import Link from 'next/link'
+   ╰────
+ ○ Compiling / ...
+ ⨯ ./src/pages/index.tsx:2:0
+Module not found: Can't resolve 'react-inter'
+  1 | import Image from 'next/image'
+> 2 | import { Inter } from 'react-inter'
+  3 |
+  4 | import React, { useContext } from 'react'
+  5 | import Link from 'next/link'
+
+https://nextjs.org/docs/messages/module-not-found
+ ⨯ ./src/pages/index.tsx:2:0
+Module not found: Can't resolve 'react-inter'
+  1 | import Image from 'next/image'
+> 2 | import { Inter } from 'react-inter'
+  3 | import React, { useContext } from 'react'
+  4 | import Link from 'next/link'
+  5 |
+
+https://nextjs.org/docs/messages/module-not-found
+ ✓ Compiled / in 340ms (321 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:64.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:68.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+ ⨯ Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11) {
+  page: '/'
+}
+ ✓ Compiled in 169ms (321 modules)
+ ✓ Compiled in 239ms (321 modules)
+ ✓ Compiled in 243ms (321 modules)
+ ✓ Compiled in 177ms (321 modules)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:55.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:59.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+ ⨯ Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11) {
+  page: '/'
+}
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:55.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:59.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+ ⨯ Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11) {
+  page: '/'
+}
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:55.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:59.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+ ⨯ Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11) {
+  page: '/'
+}
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:55.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:59.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+ ⨯ Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11) {
+  page: '/'
+}
+ ✓ Compiled in 267ms (321 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:59.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:63.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+ ⨯ Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11) {
+  page: '/'
+}
+ ✓ Compiled in 246ms (321 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `GithubIcon` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:4:1]
+  4 │ import Link from 'next/link'
+  5 │
+  6 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 │ import { GithubIcon,  } from 'icons'
+    ·          ─────┬────
+    ·               ╰── previous definition of `GithubIcon` here
+  8 │
+  9 │ import { GithubIcon,TwitterIcon } from '../../icons'
+    ·          ─────┬────
+    ·               ╰── `GithubIcon` redefined here
+ 10 │
+ 11 │
+ 12 │ const inter = Inter({ subsets: ['latin'] })
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `GithubIcon` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:4:1]
+  4 │ import Link from 'next/link'
+  5 │
+  6 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 │ import { GithubIcon,  } from 'icons'
+    ·          ─────┬────
+    ·               ╰── previous definition of `GithubIcon` here
+  8 │
+  9 │ import { GithubIcon, } from '../../icons'
+    ·          ─────┬────
+    ·               ╰── `GithubIcon` redefined here
+ 10 │
+ 11 │
+ 12 │ const inter = Inter({ subsets: ['latin'] })
+    ╰────
+ ⨯ ./src/pages/index.tsx
+Error:
+  × the name `GithubIcon` is defined multiple times
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:4:1]
+  4 │ import Link from 'next/link'
+  5 │
+  6 │ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+  7 │ import { GithubIcon,  } from 'icons'
+    ·          ─────┬────
+    ·               ╰── previous definition of `GithubIcon` here
+  8 │
+  9 │ import { GithubIcon,TwitterIcon } from '../../icons'
+    ·          ─────┬────
+    ·               ╰── `GithubIcon` redefined here
+ 10 │
+ 11 │
+ 12 │ const inter = Inter({ subsets: ['latin'] })
+    ╰────
+ ✓ Compiled in 234ms (321 modules)
+ ✓ Compiled in 251ms (321 modules)
+ ✓ Compiled in 198ms (321 modules)
+ ✓ Compiled in 614ms (321 modules)
+ ✓ Compiled in 185ms (321 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled / in 419ms (318 modules)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:63.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:67.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:63.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:67.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:63.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:67.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:63.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check your code at index.tsx:67.
+    at Home (webpack-internal:///./src/pages/index.tsx:24:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+ ⨯ Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11) {
+  page: '/'
+}
+ ⨯ Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11) {
+  page: '/'
+}
+ ⨯ Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11) {
+  page: '/'
+}
+ ⨯ Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6043:9)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11) {
+  page: '/'
+}
+ ✓ Compiled in 238ms (318 modules)
+ ✓ Compiled in 218ms (318 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled / in 429ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehavior>.
+Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
+    at LinkComponent (webpack-internal:///./node_modules/next/dist/client/link.js:266:23)
+    at renderWithHooks (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5658:16)
+    at renderForwardRef (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5842:18)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6005:11)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehavior>.
+Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
+    at LinkComponent (webpack-internal:///./node_modules/next/dist/client/link.js:266:23)
+    at renderWithHooks (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5658:16)
+    at renderForwardRef (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5842:18)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6005:11)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehavior>.
+Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
+    at LinkComponent (webpack-internal:///./node_modules/next/dist/client/link.js:266:23)
+    at renderWithHooks (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5658:16)
+    at renderForwardRef (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5842:18)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6005:11)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehavior>.
+Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
+    at LinkComponent (webpack-internal:///./node_modules/next/dist/client/link.js:266:23)
+    at renderWithHooks (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5658:16)
+    at renderForwardRef (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5842:18)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6005:11)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+ ⨯ node_modules\next\dist\client\link.js (271:22) @ LinkComponent
+ ⨯ Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehavior>.
+Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
+    at LinkComponent (webpack-internal:///./node_modules/next/dist/client/link.js:266:23)
+    at renderWithHooks (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5658:16)
+    at renderForwardRef (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5842:18)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6005:11)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14) {
+  page: '/'
+}
+null
+ ⨯ node_modules\next\dist\client\link.js (271:22) @ LinkComponent
+ ⨯ Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehavior>.
+Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
+    at LinkComponent (webpack-internal:///./node_modules/next/dist/client/link.js:266:23)
+    at renderWithHooks (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5658:16)
+    at renderForwardRef (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5842:18)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6005:11)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14) {
+  page: '/'
+}
+null
+ ⨯ node_modules\next\dist\client\link.js (271:22) @ LinkComponent
+ ⨯ Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehavior>.
+Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
+    at LinkComponent (webpack-internal:///./node_modules/next/dist/client/link.js:266:23)
+    at renderWithHooks (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5658:16)
+    at renderForwardRef (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5842:18)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6005:11)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14) {
+  page: '/'
+}
+null
+ ⨯ node_modules\next\dist\client\link.js (271:22) @ LinkComponent
+ ⨯ Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehavior>.
+Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
+    at LinkComponent (webpack-internal:///./node_modules/next/dist/client/link.js:266:23)
+    at renderWithHooks (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5658:16)
+    at renderForwardRef (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5842:18)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6005:11)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderHostElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5642:3)
+    at renderElement (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:5952:5)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6104:11)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14)
+    at renderNode (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6259:12)
+    at renderChildrenArray (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6211:7)
+    at renderNodeDestructiveImpl (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6141:7)
+    at renderNodeDestructive (D:\VITA_REFATORING\vita-system-frontend\node_modules\react-dom\cjs\react-dom-server.browser.development.js:6076:14) {
+  page: '/'
+}
+null
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `section`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:14:1]
+ 14 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+ 15 │
+ 16 │   return (
+ 17 │     <section>
+    ·      ───────
+ 18 │
+ 19 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+ 20 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `section`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:14:1]
+ 14 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+ 15 │
+ 16 │   return (
+ 17 │     <section>
+    ·      ───────
+ 18 │
+ 19 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+ 20 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `section`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:14:1]
+ 14 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+ 15 │
+ 16 │   return (
+ 17 │     <section>
+    ·      ───────
+ 18 │
+ 19 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+ 20 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `section`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:14:1]
+ 14 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+ 15 │
+ 16 │   return (
+ 17 │     <section>
+    ·      ───────
+ 18 │
+ 19 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+ 20 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `section`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:14:1]
+ 14 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+ 15 │
+ 16 │   return (
+ 17 │     <section>
+    ·      ───────
+ 18 │
+ 19 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+ 20 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 517ms (231 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ✓ Compiled in 188ms (231 modules)
+ ✓ Compiled in 509ms (318 modules)
+ ✓ Compiled in 218ms (318 modules)
+ ✓ Compiled in 217ms (318 modules)
+ ✓ Compiled in 212ms (318 modules)
+ ✓ Compiled in 178ms (260 modules)
+ ✓ Compiled in 207ms (231 modules)
+ ✓ Compiled in 261ms (231 modules)
+ ✓ Compiled in 194ms (231 modules)
+ ✓ Compiled in 352ms (231 modules)
+ ✓ Compiled in 191ms (231 modules)
+ ✓ Compiled in 237ms (231 modules)
+ ✓ Compiled in 190ms (231 modules)
+ ✓ Compiled in 187ms (231 modules)
+ ✓ Compiled in 169ms (231 modules)
+ ✓ Compiled in 213ms (231 modules)
+ ✓ Compiled in 160ms (231 modules)
+ ✓ Compiled in 178ms (260 modules)
+ ✓ Compiled in 185ms (260 modules)
+ ✓ Compiled in 342ms (318 modules)
+ ✓ Compiled in 183ms (318 modules)
+ ✓ Compiled in 208ms (318 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `section`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:14:1]
+ 14 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+ 15 │
+ 16 │   return (
+ 17 │     <section>
+    ·      ───────
+ 18 │
+ 19 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+ 20 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 167ms (318 modules)
+ ✓ Compiled in 192ms (260 modules)
+ ✓ Compiled in 218ms (260 modules)
+ ✓ Compiled in 196ms (260 modules)
+ ✓ Compiled in 230ms (260 modules)
+ ✓ Compiled in 129ms (260 modules)
+ ✓ Compiled in 142ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ✓ Compiled in 237ms (260 modules)
+ ✓ Compiled in 241ms (260 modules)
+ ✓ Compiled in 268ms (260 modules)
+ ✓ Compiled in 163ms (260 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⨯ src\pages\index.tsx (10:14) @ Inter
+ ⨯ ReferenceError: Inter is not defined
+    at eval (webpack-internal:///./src/pages/index.tsx:21:15)
+    at ./src/pages/index.tsx (D:\VITA_REFATORING\vita-system-frontend\.next\server\pages\index.js:55:1)
+    at __webpack_require__ (D:\VITA_REFATORING\vita-system-frontend\.next\server\webpack-runtime.js:33:42)
+    at eval (webpack-internal:///./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES&page=%2F&preferredRegion=&absolutePagePath=.%2Fsrc%5Cpages%5Cindex.tsx&absoluteAppPath=private-next-pages%2F_app&absoluteDocumentPath=private-next-pages%2F_document&middlewareConfigBase64=e30%3D!:22:78)
+    at ./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES&page=%2F&preferredRegion=&absolutePagePath=.%2Fsrc%5Cpages%5Cindex.tsx&absoluteAppPath=private-next-pages%2F_app&absoluteDocumentPath=private-next-pages%2F_document&middlewareConfigBase64=e30%3D! (D:\VITA_REFATORING\vita-system-frontend\.next\server\pages\index.js:22:1)
+    at __webpack_require__ (D:\VITA_REFATORING\vita-system-frontend\.next\server\webpack-runtime.js:33:42)
+    at __webpack_exec__ (D:\VITA_REFATORING\vita-system-frontend\.next\server\pages\index.js:152:39)
+    at D:\VITA_REFATORING\vita-system-frontend\.next\server\pages\index.js:153:104
+    at __webpack_require__.X (D:\VITA_REFATORING\vita-system-frontend\.next\server\webpack-runtime.js:116:21)
+    at D:\VITA_REFATORING\vita-system-frontend\.next\server\pages\index.js:153:47
+    at Object.<anonymous> (D:\VITA_REFATORING\vita-system-frontend\.next\server\pages\index.js:156:3)
+    at Module._compile (node:internal/modules/cjs/loader:1375:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1434:10)
+    at Module.load (node:internal/modules/cjs/loader:1206:32)
+    at Module._load (node:internal/modules/cjs/loader:1022:12) {
+  page: '/'
+}
+   8 |
+   9 |
+> 10 | const inter = Inter({ subsets: ['latin'] })
+     |              ^
+  11 |
+  12 | export default function Home() {
+  13 |   const { mode } = useContext(WindmillContext)
+ ✓ Compiled in 302ms (263 modules)
+ ✓ Compiled in 203ms (263 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 258ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ✓ Compiled in 160ms (260 modules)
+ ✓ Compiled in 134ms (260 modules)
+ ✓ Compiled in 295ms (260 modules)
+ ✓ Compiled in 281ms (260 modules)
+ ✓ Compiled in 206ms (260 modules)
+ ✓ Compiled in 197ms (260 modules)
+ ✓ Compiled in 198ms (260 modules)
+ ✓ Compiled in 805ms (318 modules)
+ ✓ Compiled in 369ms (318 modules)
+ ✓ Compiled in 175ms (318 modules)
+ ✓ Compiled in 119ms (318 modules)
+ ✓ Compiled in 188ms (318 modules)
+ ✓ Compiled in 271ms (260 modules)
+ ✓ Compiled in 243ms (260 modules)
+ ✓ Compiled in 201ms (260 modules)
+ ✓ Compiled in 183ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ✓ Compiled in 185ms (260 modules)
+ ✓ Compiled in 176ms (260 modules)
+ ✓ Compiled in 155ms (260 modules)
+ ✓ Compiled in 182ms (260 modules)
+ ✓ Compiled in 200ms (260 modules)
+ ✓ Compiled in 331ms (260 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `div`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:14:1]
+ 14 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+ 15 │
+ 16 │   return (
+ 17 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ·      ───
+ 18 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 19 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 20 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 158ms (260 modules)
+ ✓ Compiled in 175ms (260 modules)
+ ✓ Compiled in 175ms (260 modules)
+ ✓ Compiled in 141ms (260 modules)
+ ✓ Compiled in 231ms (260 modules)
+ ✓ Compiled in 132ms (260 modules)
+ ✓ Compiled in 188ms (260 modules)
+ ✓ Compiled in 176ms (260 modules)
+ ✓ Compiled in 126ms (260 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected ',', got 'className'
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:15:1]
+ 15 │
+ 16 │   return (
+ 17 │     <></>
+ 18 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ·          ─────────
+ 19 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 20 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 21 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected ',', got 'className'
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:15:1]
+ 15 │
+ 16 │   return (
+ 17 │     <>sec</>
+ 18 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ·          ─────────
+ 19 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 20 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 21 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected ',', got 'className'
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:15:1]
+ 15 │
+ 16 │   return (
+ 17 │     <></>
+ 18 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ·          ─────────
+ 19 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 20 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 21 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected ',', got 'className'
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:15:1]
+ 15 │
+ 16 │   return (
+ 17 │     <section></section>
+ 18 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ·          ─────────
+ 19 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 20 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 21 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `section`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:14:1]
+ 14 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+ 15 │
+ 16 │   return (
+ 17 │     <section>
+    ·      ───────
+ 18 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+ 19 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 20 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 373ms (260 modules)
+ ✓ Compiled in 161ms (260 modules)
+ ✓ Compiled in 162ms (260 modules)
+ ✓ Compiled in 164ms (260 modules)
+ ✓ Compiled in 126ms (260 modules)
+ ✓ Compiled in 215ms (260 modules)
+ ✓ Compiled in 119ms (260 modules)
+ ✓ Compiled in 210ms (260 modules)
+ ✓ Compiled in 176ms (260 modules)
+ ✓ Compiled in 207ms (260 modules)
+ ✓ Compiled in 256ms (260 modules)
+ ✓ Compiled in 184ms (260 modules)
+ ✓ Compiled in 176ms (260 modules)
+ ✓ Compiled in 312ms (260 modules)
+ ✓ Compiled in 127ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ✓ Compiled in 171ms (260 modules)
+ ✓ Compiled in 260ms (260 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `section`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:14:1]
+ 14 │   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/assets/img/login-office.jpg'
+ 15 │
+ 16 │   return (
+ 17 │     <section className='flex items-center justify-center h-[100vh]'>
+    ·      ───────
+ 18 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 19 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 20 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 181ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected ',', got 'className'
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:15:1]
+ 15 │
+ 16 │   return (
+ 17 │     <section></section>
+ 18 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ·          ─────────
+ 19 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 20 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 21 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected ',', got 'className'
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:15:1]
+ 15 │
+ 16 │   return (
+ 17 │     <section></section>
+ 18 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ·          ─────────
+ 19 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 20 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 21 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 160ms (260 modules)
+ ✓ Compiled in 115ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ✓ Compiled in 403ms (318 modules)
+ ✓ Compiled in 176ms (318 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `div`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:15:1]
+ 15 │
+ 16 │   return (
+ 17 │
+ 18 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ·      ───
+ 19 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 20 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 21 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 290ms (260 modules)
+ ✓ Compiled in 161ms (260 modules)
+ ✓ Compiled in 228ms (260 modules)
+ ✓ Compiled in 162ms (260 modules)
+ ✓ Compiled in 123ms (260 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `div`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:15:1]
+ 15 │
+ 16 │   return (
+ 17 │
+ 18 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ·      ───
+ 19 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 20 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 21 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 502ms (318 modules)
+ ✓ Compiled in 204ms (260 modules)
+ ✓ Compiled in 156ms (260 modules)
+ ✓ Compiled in 200ms (260 modules)
+ ✓ Compiled in 186ms (260 modules)
+ ✓ Compiled in 169ms (260 modules)
+ ✓ Compiled in 178ms (260 modules)
+ ✓ Compiled in 213ms (260 modules)
+ ✓ Compiled in 174ms (260 modules)
+ ✓ Compiled in 194ms (260 modules)
+ ✓ Compiled in 188ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Warning: Invalid DOM property `fill-rule`. Did you mean `fillRule`?
+    at path
+    at svg
+    at button
+    at div
+    at main
+    at div
+    at div
+    at div
+    at Home (webpack-internal:///./src/pages/index.tsx:23:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+Warning: Invalid DOM property `clip-rule`. Did you mean `clipRule`?
+    at path
+    at svg
+    at button
+    at div
+    at main
+    at div
+    at div
+    at div
+    at Home (webpack-internal:///./src/pages/index.tsx:23:71)
+    at App (webpack-internal:///./src/pages/_app.tsx:11:16)
+    at StyleRegistry (D:\VITA_REFATORING\vita-system-frontend\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at eY (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:8:22559)
+    at eI (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:1760)
+    at eD (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:17:3083)
+    at div
+    at eQ (D:\VITA_REFATORING\vita-system-frontend\node_modules\next\dist\compiled\next-server\pages.runtime.dev.js:26:763)
+ ✓ Compiled in 463ms (260 modules)
+ ✓ Compiled in 241ms (260 modules)
+ ✓ Compiled in 273ms (260 modules)
+ ✓ Compiled in 175ms (260 modules)
+ ✓ Compiled in 204ms (260 modules)
+ ✓ Compiled in 186ms (260 modules)
+ ✓ Compiled in 227ms (260 modules)
+ ✓ Compiled in 179ms (260 modules)
+ ✓ Compiled in 223ms (260 modules)
+ ✓ Compiled in 184ms (260 modules)
+ ✓ Compiled in 163ms (260 modules)
+ ✓ Compiled in 173ms (260 modules)
+ ✓ Compiled in 206ms (260 modules)
+ ✓ Compiled in 115ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Unexpected token `div`. Expected jsx identifier
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:15:1]
+ 15 │
+ 16 │   return (
+ 17 │
+ 18 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ·      ───
+ 19 │       <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+ 20 │         <div className='flex flex-col overflow-y-auto md:flex-row'>
+ 21 │           <div className='relative h-32 md:h-auto md:w-1/2'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 181ms (260 modules)
+ ✓ Compiled in 357ms (260 modules)
+ ✓ Compiled in 171ms (260 modules)
+ ✓ Compiled in 278ms (260 modules)
+ ✓ Compiled in 186ms (260 modules)
+ ✓ Compiled in 126ms (260 modules)
+ ✓ Compiled in 128ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ✓ Compiled in 189ms (260 modules)
+ ✓ Compiled in 139ms (260 modules)
+ ✓ Compiled in 247ms (260 modules)
+ ✓ Compiled in 185ms (260 modules)
+ ✓ Compiled in 251ms (260 modules)
+ ✓ Compiled in 206ms (260 modules)
+ ✓ Compiled in 180ms (260 modules)
+ ✓ Compiled in 131ms (260 modules)
+ ⨯ ./src/pages/index.tsx:10:38
+Module not found: Can't resolve '/assets/img/login-office-dark.jpg'
+   8 | export default function Home() {
+   9 |   const { mode } = useContext(WindmillContext)
+> 10 |   const imgSource = mode === 'dark' ? require('/assets/img/login-office-dark.jpg') : require('/assets/img/login-office.jpg');
+     |                                      ^
+  11 |
+  12 |   return (
+  13 |
+
+https://nextjs.org/docs/messages/module-not-found
+ ⨯ ./src/pages/index.tsx:10:38
+Module not found: Can't resolve '/assets/img/login-office-dark.jpg'
+   8 | export default function Home() {
+   9 |   const { mode } = useContext(WindmillContext)
+> 10 |   const imgSource = mode === 'dark' ? require('/assets/img/login-office-dark.jpg') : require('/assets/img/login-office.jpg');
+     |                                      ^
+  11 |
+  12 |   return (
+  13 |
+
+https://nextjs.org/docs/messages/module-not-found
+ ✓ Compiled in 158ms (260 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected unicode escape
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:8:1]
+  8 │ export default function Home() {
+  9 │   const { mode } = useContext(WindmillContext)
+ 10 │   const imgSource = mode === 'dark' ? '../../public/assets/img/login-office-dark.jpg' : '../../public/assets/assets/img/login-office.jpg'
+ 11 │   D:\VITA_REFATORING\vita-system-frontend\public\assets\img\login-office.jpg
+    ·     ▲
+ 12 │   return (
+ 13 │
+ 14 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected unicode escape
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:8:1]
+  8 │ export default function Home() {
+  9 │   const { mode } = useContext(WindmillContext)
+ 10 │   const imgSource = mode === 'dark' ? '../../public/assets/img/login-office.jpg' : '../../public/assets/assets/img/login-office.jpg'
+ 11 │   D:\VITA_REFATORING\vita-system-frontend\public\assets\img\login-office.jpg
+    ·     ▲
+ 12 │   return (
+ 13 │
+ 14 │     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 250ms (260 modules)
+ ✓ Compiled in 488ms (260 modules)
+ ✓ Compiled in 538ms (260 modules)
+ ✓ Compiled in 324ms (260 modules)
+ ✓ Compiled in 350ms (260 modules)
+ ✓ Compiled in 463ms (260 modules)
+ ⨯ ./src/pages/index.tsx
+Error:
+  × Expected a semicolon
+    ╭─[D:\VITA_REFATORING\vita-system-frontend\src\pages\index.tsx:6:1]
+  6 │
+  7 │ export default function Home() {
+  8 │   const { mode } = useContext(WindmillContext)
+  9 │   const imgSource = '/assets/img/login-office.jpg' : '/assets/img/login-office.jpg';
+    ·                                                    ─
+ 10 │
+ 11 │   return (
+ 12 │
+    ╰────
+
+Caused by:
+    Syntax Error
+ ✓ Compiled in 247ms (260 modules)
+ ✓ Compiled in 195ms (260 modules)
+ ✓ Compiled in 208ms (260 modules)
+ ✓ Compiled in 188ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ✓ Compiled in 254ms (260 modules)
+ ✓ Compiled in 195ms (260 modules)
+ ✓ Compiled in 186ms (260 modules)
+ ✓ Compiled in 352ms (260 modules)
+ ✓ Compiled in 226ms (260 modules)
+ ✓ Compiled in 193ms (260 modules)
+ ✓ Compiled in 180ms (260 modules)
+Image with src "/assets/img/login-office.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ ✓ Compiled in 202ms (260 modules)
+
+Deseja finalizar o arquivo em lotes (S/N)?
+^C
+PS D:\VITA_REFATORING\vita-system-frontend> ^C
+PS D:\VITA_REFATORING\vita-system-frontend> cd ..
+PS D:\VITA_REFATORING> ls
+
+
+    Diretório: D:\VITA_REFATORING
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        03/01/2024     21:44                API
+d-----        04/01/2024     00:42                vita-system-frontend
+
+
+PS D:\VITA_REFATORING> cd API
+PS D:\VITA_REFATORING\API> LS
+
+
+    Diretório: D:\VITA_REFATORING\API
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        03/01/2024     21:44                node_modules
+d-----        03/01/2024     21:56                prisma
+d-----        03/01/2024     23:38                src
+-a----        03/01/2024     21:54            493 .env
+-a----        03/01/2024     21:31            677 .eslintrc.json
+-a----        03/01/2024     21:44             70 .gitignore
+-a----        03/01/2024     21:31         199640 package-lock.json
+-a----        03/01/2024     21:41            547 package.json
+-a----        03/01/2024     21:26          12397 tsconfig.json
+
+
+PS D:\VITA_REFATORING\API> code .
+PS D:\VITA_REFATORING\API> npx prisma migrate dev
+>>
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": MySQL database "mysql_vita" at "localhost:3306"
+
+√ Enter a name for the new migration: ... create_users
+Applying migration `20240104042457_create_users`
+
+The following migration(s) have been created and applied from new schema changes:
+
+migrations/
+  └─ 20240104042457_create_users/
+    └─ migration.sql
+
+Your database is now in sync with your schema.
+
+✔ Generated Prisma Client (v5.7.1) to .\node_modules\@prisma\client in 79ms
+
+
+PS D:\VITA_REFATORING\API> npx prisma migrate dev
+>>
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": MySQL database "mysql_vita" at "localhost:3306"
+
+- Drift detected: Your database schema is not in sync with your migration history.
+
+The following is a summary of the differences between the expected database schema given your migrations files, and the actual schema of the database.
+
+It should be understood as the set of changes to get from the expected schema to the actual schema.
+
+[+] Added tables
+  - dados
+  - users
+
+- The following migration(s) are applied to the database but missing from the local migrations directory: 20240104005603_create_table_users, 20240104010644_create_table_dados, 20240104042457_create_users
+
+√ We need to reset the MySQL database "mysql_vita" at "localhost:3306"
+Do you want to continue? All data will be lost. ... yes
+
+√ Enter a name for the new migration: ... create_users
+Applying migration `20240104042541_create_users`
+
+The following migration(s) have been created and applied from new schema changes:
+
+migrations/
+  └─ 20240104042541_create_users/
+    └─ migration.sql
+
+Your database is now in sync with your schema.
+
+✔ Generated Prisma Client (v5.7.1) to .\node_modules\@prisma\client in 81ms
+
+
+PS D:\VITA_REFATORING\API> npx prisma migrate dev
+>>
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": MySQL database "mysql_vita" at "localhost:3306"
+
+- Drift detected: Your database schema is not in sync with your migration history.
+
+The following is a summary of the differences between the expected database schema given your migrations files, and the actual schema of the database.
+
+It should be understood as the set of changes to get from the expected schema to the actual schema.
+
+[+] Added tables
+  - dados
+  - users
+
+- The following migration(s) are applied to the database but missing from the local migrations directory: 20240104042541_create_users
+
+√ We need to reset the MySQL database "mysql_vita" at "localhost:3306"
+Do you want to continue? All data will be lost. ... yes
+
+√ Enter a name for the new migration: ... create_table
+Applying migration `20240104043138_create_table`
+
+The following migration(s) have been created and applied from new schema changes:
+
+migrations/
+  └─ 20240104043138_create_table/
+    └─ migration.sql
+
+Your database is now in sync with your schema.
+
+✔ Generated Prisma Client (v5.7.1) to .\node_modules\@prisma\client in 109ms
+
+
+PS D:\VITA_REFATORING\API> npm install @types/bcrypt --save-dev
+
+added 1 package, and audited 266 packages in 6s
+
+50 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\VITA_REFATORING\API> npm install express-async-errors
+
+added 1 package, and audited 267 packages in 5s
+
+50 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\VITA_REFATORING\API> npm run dev
+
+> api@1.0.0 dev
+> ts-node-dev ./src/server.ts
+
+[INFO] 02:47:32 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.3.3)
+Error: Cannot find module 'bcrypt'
+Require stack:
+- D:\VITA_REFATORING\API\src\repositories\UserRepository.ts
+- D:\VITA_REFATORING\API\src\controllers\Usercontrollers.ts
+- D:\VITA_REFATORING\API\src\server.ts
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:1143:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:984:27)
+    at Module.require (node:internal/modules/cjs/loader:1234:19)
+    at require (node:internal/modules/helpers:176:18)
+    at Object.<anonymous> (D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:1:1)
+    at Module._compile (node:internal/modules/cjs/loader:1375:14)
+    at Module._compile (D:\VITA_REFATORING\API\node_modules\source-map-support\source-map-support.js:568:25)
+    at Module.m._compile (C:\Users\DELL\AppData\Local\Temp\ts-node-dev-hook-797170072132878.js:69:33)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1434:10)
+    at require.extensions..jsx.require.extensions..js (C:\Users\DELL\AppData\Local\Temp\ts-node-dev-hook-797170072132878.js:114:20)
+[ERROR] 02:47:40 Error: Cannot find module 'bcrypt'
+Require stack:
+- D:\VITA_REFATORING\API\src\repositories\UserRepository.ts
+- D:\VITA_REFATORING\API\src\controllers\Usercontrollers.ts
+- D:\VITA_REFATORING\API\src\server.ts
+^C^CDeseja finalizar o arquivo em lotes (S/N)?
+^C
+PS D:\VITA_REFATORING\API> ^C
+PS D:\VITA_REFATORING\API> ^C
+PS D:\VITA_REFATORING\API> npm install bcrypt
+>>
+
+added 43 packages, and audited 310 packages in 17s
+
+51 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS D:\VITA_REFATORING\API> npm run dev
+
+> api@1.0.0 dev
+> ts-node-dev ./src/server.ts
+
+[INFO] 02:49:02 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.3.3)
+server rodando na porta 8000
+Error: Erro ao criar usuário: data and salt arguments required
+    at UserRepository.<anonymous> (D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:28:19)
+    at Generator.throw (<anonymous>)
+    at rejected (D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:6:65)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+[ERROR] 02:50:44 Error: Erro ao criar usuário: data and salt arguments required
+[INFO] 02:53:45 Restarting: D:\VITA_REFATORING\API\src\repositories\UserRepository.ts has been modified
+server rodando na porta 8000
+[INFO] 02:54:58 Restarting: D:\VITA_REFATORING\API\src\server.ts has been modified
+Server running on port 8000
+[INFO] 02:55:10 Restarting: D:\VITA_REFATORING\API\src\server.ts has been modified
+Server running on port 8000
+[INFO] 02:55:12 Restarting: D:\VITA_REFATORING\API\src\server.ts has been modified
+[INFO] 02:55:12 Restarting: D:\VITA_REFATORING\API\src\server.ts has been modified
+Server running on port 8000
+Error: Erro ao criar usuário: data and salt arguments required
+    at UserRepository.<anonymous> (D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:28:19)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:5:58)
+[ERROR] 02:55:22 Error: Erro ao criar usuário: data and salt arguments required
+[INFO] 02:56:22 Restarting: D:\VITA_REFATORING\API\src\repositories\UserRepository.ts has been modified
+Server running on port 8000
+[INFO] 02:57:26 Restarting: D:\VITA_REFATORING\API\src\repositories\UserRepository.ts has been modified
+Compilation error in D:\VITA_REFATORING\API\src\repositories\UserRepository.ts
+[ERROR] 02:57:28 ⨯ Unable to compile TypeScript:
+src/repositories/UserRepository.ts(22,36): error TS2552: Cannot find name 'bcrypt'. Did you mean 'crypto'?
+
+[INFO] 02:57:32 Restarting: D:\VITA_REFATORING\API\src\repositories\UserRepository.ts has been modified
+Compilation error in D:\VITA_REFATORING\API\src\repositories\UserRepository.ts
+Compilation error in D:\VITA_REFATORING\API\src\repositories\UserRepository.ts
+[ERROR] 02:57:36 ⨯ Unable to compile TypeScript:
+src/repositories/UserRepository.ts(22,36): error TS2552: Cannot find name 'bcrypt'. Did you mean 'crypto'?
+
+[INFO] 02:57:40 Restarting: D:\VITA_REFATORING\API\src\repositories\UserRepository.ts has been modified
+Server running on port 8000
+Error: Erro ao criar usuário: Erro: senha inválida
+    at UserRepository.<anonymous> (D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:34:19)
+    at Generator.next (<anonymous>)
+    at D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:4:12)
+    at UserRepository.create (D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:17:16)
+    at CreateUserService.<anonymous> (D:\VITA_REFATORING\API\src\services\CreateUserService.ts:9:48)
+    at Generator.next (<anonymous>)
+    at D:\VITA_REFATORING\API\src\services\CreateUserService.ts:8:71
+    at new Promise (<anonymous>)
+[ERROR] 02:57:58 Error: Erro ao criar usuário: Erro: senha inválida
+[INFO] 02:58:22 Restarting: D:\VITA_REFATORING\API\src\repositories\UserRepository.ts has been modified
+Server running on port 8000
+Error: Erro ao criar usuário: data and salt arguments required
+    at UserRepository.<anonymous> (D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:30:19)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\VITA_REFATORING\API\src\repositories\UserRepository.ts:5:58)
+[ERROR] 02:59:19 Error: Erro ao criar usuário: da

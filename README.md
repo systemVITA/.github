@@ -95,3 +95,122 @@ Este projeto está sob a licença (Copyright (c) 2023 Antonio Marcos Patricio Ca
 * Convide alguém da equipe para uma cerveja 🍺;
 * Um agradecimento publicamente 🫂;
 
+
+## adicionar o arquivo para configuração do nginx
+
+```
+server {
+  listen 5000;
+
+  location / {
+    proxy_pass http://frontend:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host $host;
+  }
+
+  location /api {
+    proxy_pass http://api:8000;
+  }
+}
+```
+
+
+
+## Docker Compose - orquestrando os containeres
+
+```
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: database
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  api:
+    depends_on:
+      - db
+    build:
+      context: ../backend
+      dockerfile: dev.Dockerfile
+    image: dev-api
+    env_file:
+      - ../backend/.env
+    volumes:
+      - type: bind
+        source: ../backend/src
+        target: /app/src
+    ports:
+      - 3500:3500
+      - 5555:5555 # enable prisma studio access
+
+  frontend:
+    depends_on:
+      - api
+    build:
+      context: ../frontend
+      dockerfile: dev.Dockerfile
+    image: dev-frontend
+    volumes:
+      - type: bind
+        source: ../frontend/src
+        target: /app/src
+      - type: bind
+        source: ../frontend/public
+        target: /app/public
+      - type: bind
+        source: ../frontend/styles
+        target: /app/styles
+
+  proxy:
+    depends_on:
+      - api
+      - frontend
+    build:
+      context: ./
+      dockerfile: proxy.Dockerfile
+    image: dev-proxy
+    ports:
+      - 5000:5000
+    logging:
+      driver: none
+
+volumes:
+  db_data:
+
+```
+
+```
+postgresql://<USERNAME>:<PASSWORD>@<HOSTNAME>:<PORT>/<DATABASE>?schema=<SCHEMA>
+
+```
+
+No contexto do Docker Compose essa url fica, portanto, da seguinte forma:
+
+```
+postgresql://postgres:postgres@db:5432/database?schema=public
+
+```
+
+
+```
+volumes:
+  - type: bind
+    source: ../backend/src
+    target: /app/src
+```
+
+
+
+## Rodando o projeto
+
+Tudo que é preciso para inicializar o projeto é ir na pasta dev-env e digitar no terminal:
+
+```
+docker-compose up
+```
+A opção --build pode ser usada se for necessário reconstruir alguma das imagens. A opção -d ou --detach pode ser usada para rodar a aplicação em segundo plano (por padrão, roda no terminal em que foi chamada)

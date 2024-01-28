@@ -5,7 +5,11 @@ const char* ssid = "DOMINICI";
 const char* password = "99731540";
 /*const char* ssid = "Luis";
 const char* password = "c0gum3l0";*/
+/* const char* mqtt_server = "localhost"; */
 const char* mqtt_server = "193.203.174.233";
+
+/* const char* mqtt_server = "172.17.0.1"; */
+/* const char* mqtt_server = "172.18.0.3"; */
 const int mqtt_port = 1883;
 const char* mqtt_user = "user1";
 const char* mqtt_password = "123";

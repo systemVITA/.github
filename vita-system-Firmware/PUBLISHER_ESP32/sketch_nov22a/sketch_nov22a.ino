@@ -60,10 +60,10 @@ void setup() {
 void loop() {
   client.loop();
   jsonDoc["id"] = id;
-  jsonDoc["Volume_corrente"] = volume_corrente;
-  jsonDoc["Razao_IE"] = razao_ie;
-  jsonDoc["Frequencia"] = frequencia;
-  jsonDoc["Fluxo_medio"] = fluxo_medio;
+  jsonDoc["Volume_corrente"] = random(50, 200); 
+  jsonDoc["Razao_IE"] = random(1, 10);  
+  jsonDoc["Frequencia"] = random(10, 30);  
+  jsonDoc["Fluxo_medio"] = random(100, 500);  
   
   char jsonBuffer[200];
   serializeJson(jsonDoc, jsonBuffer);
