@@ -171,28 +171,6 @@ docker logs my_node
 docker network connect REDE my_node
 ```
 
-
-
-## 📌 Versão
-
-Nós usamos [GitHub](https://github.com) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/orgs/systemVITA/repositories). 
-
-## ✒️ Autores
-
-
-* **Nerval** - *Documentação - Dev - Engenheiro* - [PERFIL](https://github.com/nervaljunior)
-
-## 📄 Licença
-
-Este projeto está sob a licença (Copyright (c) 2023 Antonio Marcos Patricio Castro) - veja o arquivo [LICENSE.md]() para detalhes.
-
-## 🎁 Expressões de gratidão
-
-* Conte a outras pessoas sobre este projeto 📢;
-* Convide alguém da equipe para uma cerveja 🍺;
-* Um agradecimento publicamente 🫂;
-
-
 ## adicionar o arquivo para configuração do nginx
 
 ```
