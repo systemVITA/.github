@@ -1,11 +1,6 @@
-# Vita-System
-sistema de controle e plataforma de recebimento de dados do VITA
+# Projeto Vita-System - REDE PARA CAPTAÇÃO DE DADOS VINDOS DE VENTILADOR VITA  [VITA](https://github.com/orgs/systemVITA/repositories). ![VITA Logo](logo.png)
 
-
-# Projeto VITA - Monitoramento e Controle de Dispositivo Médico
-
-![VITA Logo](logo.png)(sem logo// AINDA)
-
+Projeto de uma rede para extração de dados de um Arduino Rev2 microcontrolador do ventilador VITA. sistema de controle e plataforma de recebimento de dados do VITA
 O Projeto VITA é uma iniciativa que visa desenvolver um sistema embarcado inovador para o monitoramento e controle de dispositivos médicos, utilizando tecnologias de Internet das Coisas (IoT) e integração de hardware e software. O objetivo central é permitir um acompanhamento eficiente de dispositivos médicos, fornecendo uma interface gráfica amigável para visualização em tempo real, além de comunicação segura com um banco de dados para análise posterior.
 
 ## Características Principais
@@ -44,9 +39,9 @@ Contribuições são bem-vindas! Se você encontrou algum bug ou tem alguma suge
 Este projeto foi desenvolvido por Nerval Junior e faz parte de um trabalho acadêmico/pesquisa. Para mais informações, consulte os documentos e referências mencionados.
 
 ### ⚡️ Backend
-- FastAPI
-- Flask
-- MongoDB
+- FastAPI para dados advindos do microcontrolador
+- typescript com express
+- mysql
 
 
 ### 🎨 Frontend
@@ -59,8 +54,6 @@ Este projeto foi desenvolvido por Nerval Junior e faz parte de um trabalho acad�
 MIT
 
 Este projeto é licenciado sob a [Licença MIT](LICENSE).
-
-
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -105,9 +98,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-# REDE PARA CAPTAÇÃO DE DADOS VINDOS DE VENTILADOR VITA  [VITA](https://github.com/orgs/systemVITA/repositories). 
 
-Projeto de uma rede para extração de dados de um Arduino Rev2 microcontrolador do ventilador VITA.
 
 ## 📌 Planejamento
 [![Tracking_Rede_Vita_System]()]()
