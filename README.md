@@ -88,11 +88,24 @@ A maneira mais fácil de implantar seu aplicativo Next.js é usar a [Plataforma 
 
 Confira nossa [documentação de implantação do Next.js](https://nextjs.org/docs/deployment) para mais detalhes.
 
+## 📌 Versão
+
+Nós usamos [GitHub](https://github.com) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/orgs/systemVITA/repositories). 
+
+## ✒️ Autor
+
+* **Nerval** - *Documentação - Dev - Engenheiro* - [PERFIL](https://github.com/nervaljunior)
+* 
 ### 📄 Licença
 MIT
 
 Este projeto está licenciado sob a [Licença MIT](LICENSE).
 
+## 🎁 Expressões de gratidão
+
+* Conte a outras pessoas sobre este projeto 📢;
+* Convide alguém da equipe para uma cerveja 🍺;
+* Um agradecimento publicamente 🫂;
 
 ## 🚀 Começando
 
