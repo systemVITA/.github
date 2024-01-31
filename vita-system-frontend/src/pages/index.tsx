@@ -91,11 +91,11 @@ const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpg' : '/asse
             </div>
 
 
-              <Link href='/example' passHref={true}>
-                <Button  type="submit"className='mt-4 bg-green-800 text-white' block>
-                  Fazer Login
-                </Button>
-              </Link>
+              
+            <Button  type="submit"className='mt-4 bg-green-800 text-white' block>
+              Fazer Login
+            </Button>
+           
 
             
          

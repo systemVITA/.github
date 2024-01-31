@@ -23,6 +23,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 
 // src/server.ts
 var import_express_async_errors = require("express-async-errors");
+var import_cors = __toESM(require("cors"));
 var import_express2 = __toESM(require("express"));
 
 // src/routes/index.ts
@@ -128,16 +129,123 @@ var AuthController_default = {
   }
 };
 
+// src/controllers/DadosController.ts
+var Dadoscontrollers = {
+  async createDados(req, res) {
+    try {
+      const { data_c, server, dados, status } = req.body;
+      const newDados = await prisma.log.create({
+        data: {
+          data_c,
+          server,
+          dados,
+          status
+        }
+      });
+      return res.json({
+        error: false,
+        message: "Success: dados criados com sucesso",
+        dados: newDados
+      });
+    } catch (error) {
+      return res.json({ error: true, message: error.message });
+    }
+  },
+  async logs(req, res) {
+    try {
+      const dados = await prisma.log.findMany();
+      return res.json({
+        error: false,
+        message: "Success: dados encontrados com sucesso",
+        dados
+      });
+    } catch (error) {
+      return res.json({ error: true, message: error.message });
+    }
+  },
+  async listDados(req, res) {
+    try {
+      const userId = parseInt(req.params.id, 10);
+      const userExists = await prisma.user.findUnique({ where: { id: userId } });
+      if (!userExists) {
+        return res.json({
+          error: true,
+          message: "Erro: usu\xE1rio n\xE3o encontrado"
+        });
+      }
+      const dados = await prisma.log.findMany({
+        where: {
+          server: userId
+        }
+      });
+      return res.json({
+        error: false,
+        message: "Success: dados encontrados com sucesso",
+        dados
+      });
+    } catch (error) {
+      return res.json({ error: true, message: error.message });
+    }
+  },
+  async updateDados(req, res) {
+    try {
+      const { id, data_c, server, dados, status } = req.body;
+      const updatedDados = await prisma.log.update({
+        where: { id },
+        data: {
+          data_c,
+          server,
+          dados,
+          status
+        }
+      });
+      return res.json({
+        error: false,
+        message: "Success: dados atualizados com sucesso",
+        dados: updatedDados
+      });
+    } catch (error) {
+      return res.json({ error: true, message: error.message });
+    }
+  },
+  async deleteDados(req, res) {
+    try {
+      const { id } = req.body;
+      const dadosExists = await prisma.log.findUnique({ where: { id } });
+      if (!dadosExists) {
+        return res.json({
+          error: true,
+          message: "Erro: dados n\xE3o encontrados"
+        });
+      }
+      await prisma.log.delete({ where: { id } });
+      return res.json({
+        error: false,
+        message: "Success: dados exclu\xEDdos com sucesso"
+      });
+    } catch (error) {
+      return res.json({ error: true, message: error.message });
+    }
+  }
+};
+var DadosController_default = Dadoscontrollers;
+
 // src/routes/index.ts
 var router = (0, import_express.Router)();
 router.post("/user/createUser", UserController_default.createUser);
 router.post("/user/session", AuthController_default.authUser);
+router.post("/createDados", DadosController_default.createDados);
+router.get("/listDados/:id", DadosController_default.listDados);
+router.put("/updateDados", DadosController_default.updateDados);
+router.delete("/deleteDados", DadosController_default.deleteDados);
+router.get("/logs", DadosController_default.logs);
 var routes_default = router;
 
 // src/server.ts
 var app = (0, import_express2.default)();
 var PORT = 8e3;
 app.use(import_express2.default.json());
+app.use(import_express2.default.urlencoded({ extended: true }));
 app.use((error, req, res, next) => {
   return res.json({
     status: "Error",
@@ -145,10 +253,38 @@ app.use((error, req, res, next) => {
   });
   next();
 });
-app.get("/", (req, res) => {
-  return res.send({ message: "hello world" });
+app.use((error, req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  app.use((0, import_cors.default)());
+  next();
+});
+app.get("/", (req, res, next) => {
+  const M = {
+    status: "success",
+    data: {
+      id: 1,
+      name: "Exemplo API",
+      version: "1.0.0",
+      description: "API DE REGISTRO DE DADOS"
+    }
+  };
+  res.json(M);
 });
 app.use(routes_default);
+app.use((error, req, res, next) => {
+  if (error instanceof Error) {
+    return res.status(500).json({
+      status: "Error",
+      message: error.message
+    });
+  }
+  return res.status(500).json({
+    status: "Error",
+    message: "Internal Server Error"
+  });
+});
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

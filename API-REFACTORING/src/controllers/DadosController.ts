@@ -26,6 +26,21 @@ const Dadoscontrollers = {
         }
     },
 
+    async logs(req: Request, res: Response){
+
+        try {
+            const dados = await prisma.log.findMany(); 
+    
+            return res.json({
+                error: false,
+                message: 'Success: dados encontrados com sucesso',
+                dados,
+            });
+        } catch (error: any) {
+            return res.json({ error: true, message: error.message });
+        }
+    },
+
     async listDados(req: Request, res: Response) {
         try {
             const userId = parseInt(req.params.id, 10);

@@ -21,7 +21,7 @@ RUN npm install
 RUN npx prisma generate
 
 # Build the application
-RUN npm run start
+RUN npm run build
 
 EXPOSE 8000
 

@@ -134,8 +134,114 @@ var AuthController_default = {
   }
 };
 
+// src/controllers/DadosController.ts
+var Dadoscontrollers = {
+  async createDados(req, res) {
+    try {
+      const { data_c, server, dados, status } = req.body;
+      const newDados = await prisma.log.create({
+        data: {
+          data_c,
+          server,
+          dados,
+          status
+        }
+      });
+      return res.json({
+        error: false,
+        message: "Success: dados criados com sucesso",
+        dados: newDados
+      });
+    } catch (error) {
+      return res.json({ error: true, message: error.message });
+    }
+  },
+  async logs(req, res) {
+    try {
+      const dados = await prisma.log.findMany();
+      return res.json({
+        error: false,
+        message: "Success: dados encontrados com sucesso",
+        dados
+      });
+    } catch (error) {
+      return res.json({ error: true, message: error.message });
+    }
+  },
+  async listDados(req, res) {
+    try {
+      const userId = parseInt(req.params.id, 10);
+      const userExists = await prisma.user.findUnique({ where: { id: userId } });
+      if (!userExists) {
+        return res.json({
+          error: true,
+          message: "Erro: usu\xE1rio n\xE3o encontrado"
+        });
+      }
+      const dados = await prisma.log.findMany({
+        where: {
+          server: userId
+        }
+      });
+      return res.json({
+        error: false,
+        message: "Success: dados encontrados com sucesso",
+        dados
+      });
+    } catch (error) {
+      return res.json({ error: true, message: error.message });
+    }
+  },
+  async updateDados(req, res) {
+    try {
+      const { id, data_c, server, dados, status } = req.body;
+      const updatedDados = await prisma.log.update({
+        where: { id },
+        data: {
+          data_c,
+          server,
+          dados,
+          status
+        }
+      });
+      return res.json({
+        error: false,
+        message: "Success: dados atualizados com sucesso",
+        dados: updatedDados
+      });
+    } catch (error) {
+      return res.json({ error: true, message: error.message });
+    }
+  },
+  async deleteDados(req, res) {
+    try {
+      const { id } = req.body;
+      const dadosExists = await prisma.log.findUnique({ where: { id } });
+      if (!dadosExists) {
+        return res.json({
+          error: true,
+          message: "Erro: dados n\xE3o encontrados"
+        });
+      }
+      await prisma.log.delete({ where: { id } });
+      return res.json({
+        error: false,
+        message: "Success: dados exclu\xEDdos com sucesso"
+      });
+    } catch (error) {
+      return res.json({ error: true, message: error.message });
+    }
+  }
+};
+var DadosController_default = Dadoscontrollers;
+
 // src/routes/index.ts
 var router = (0, import_express.Router)();
 router.post("/user/createUser", UserController_default.createUser);
 router.post("/user/session", AuthController_default.authUser);
+router.post("/createDados", DadosController_default.createDados);
+router.get("/listDados/:id", DadosController_default.listDados);
+router.put("/updateDados", DadosController_default.updateDados);
+router.delete("/deleteDados", DadosController_default.deleteDados);
+router.get("/logs", DadosController_default.logs);
 var routes_default = router;

@@ -36,7 +36,7 @@ app.get('/logs', (req, res) => {
 
   connection = connectionRequest();
 
-  let  query = 'SELECT * FROM logs where 1';
+  let  query = 'SELECT * FROM dados where 1';
 
     if (dataParametro) {
       query += ' AND data_c >= ?';
@@ -67,7 +67,7 @@ app.post('/set_log', (req, res) => {
   connection = connectionRequest();
 
   // SQL para inserção
-  const query = 'INSERT INTO logs (data_c, server, dados) VALUES ( ?, ?, ?)';
+  const query = 'INSERT INTO dados (data_c, server, dados) VALUES ( ?, ?, ?)';
 
   // Parâmetros para substituir os placeholders no SQL
   const parametros = [dataAtual, client, dados];
