@@ -136,6 +136,7 @@ var AuthController_default = {
 
 // src/controllers/DadosController.ts
 var Dadoscontrollers = {
+  //curl -X POST -H "Content-Type: application/json" -d '{"id": 1, "data": "2023-10-26", "server": "meu-server", "dados": {"campo1": "valor1", "campo2": "valor2"}}' http://localhost:3000/set_log
   async createDados(req, res) {
     try {
       const { data_c, server, dados, status } = req.body;
@@ -149,7 +150,7 @@ var Dadoscontrollers = {
       });
       return res.json({
         error: false,
-        message: "Success: dados criados com sucesso",
+        message: "Success: dados salvos com sucesso",
         dados: newDados
       });
     } catch (error) {

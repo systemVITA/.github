@@ -1,32 +1,24 @@
-# Use the official Node.js image as base
-FROM node:16
+FROM node:20.11
 
-# Set the working directory
+WORKDIR /src
 
-WORKDIR /src/app
-
-
-COPY ./prisma ./prisma
-
-# Copy package.json and package-lock.json to the working directory
+# Copia package.json e package-lock.json para o diretório de trabalho
 COPY package*.json ./
 
-COPY tsconfig.json ./
-
-# Install dependencies
+# Instala as dependências
 RUN npm install
 
-
-# Generate Prisma client
+# Gera o cliente Prisma
 RUN npx prisma generate
 
-# Build the application
-RUN npm run build
+# Copia o diretório Prisma
+COPY ./prisma ./prisma
 
-EXPOSE 8000
+# Copia os arquivos compilados do diretório 'dist'
+COPY ./dist ./dist
 
-# prisma studio
-EXPOSE 5555
+# Expondo portas
+EXPOSE 8000 
 
-# Command to run your application
-CMD ["npm", "start"]
+# Comando para executar sua aplicação TypeScript
+CMD ["node", "dist/server.js"]
