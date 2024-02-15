@@ -1,39 +1,24 @@
-export interface ILegends{
-  title: string
-  color: string
+export interface ILegends {
+  title: string;
+  color: string;
 }
 
-
 export const doughnutLegends: ILegends[] = [
-  { title: 'Shirts', color: 'bg-blue-500' },
-  { title: 'Shoes', color: 'bg-teal-600' },
-  { title: 'Bags', color: 'bg-purple-600' },
-]
-
-export const lineLegends: ILegends[] = [
-  { title: 'Organic', color: 'bg-teal-600' },
-  { title: 'Paid', color: 'bg-purple-600' },
-]
-
-export const barLegends: ILegends[] = [
-  { title: 'Shoes', color: 'bg-teal-600' },
-  { title: 'Bags', color: 'bg-purple-600' },
-]
+  { title: 'Low RPM²', color: 'bg-blue-500' },
+  { title: 'Medium RPM²', color: 'bg-teal-600' },
+  { title: 'High RPM²', color: 'bg-purple-600' },
+];
 
 export const doughnutOptions = {
   data: {
     datasets: [
       {
-        data: [33, 33, 33],
-        /**
-         * These colors come from Tailwind CSS palette
-         * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-         */
+        data: [200, 300, 500], // Valores representando frequência cardíaca em RPM^2
         backgroundColor: ['#0694a2', '#1c64f2', '#7e3af2'],
         label: 'Dataset 1',
       },
     ],
-    labels: ['Shoes', 'Shirts', 'Bags'],
+    labels: ['Low', 'Medium', 'High'], // Rótulos alterados para representar a frequência cardíaca
   },
   options: {
     responsive: true,
@@ -42,33 +27,32 @@ export const doughnutOptions = {
   legend: {
     display: false,
   },
-}
+};
+
+
+
+export const lineLegends: ILegends[] = [
+  { title: 'Low Flow', color: 'bg-teal-600' },
+  { title: 'Medium Flow', color: 'bg-purple-600' },
+]
 
 export const lineOptions = {
   data: {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm'],
     datasets: [
       {
-        label: 'Organic',
-        /**
-         * These colors come from Tailwind CSS palette
-         * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-         */
+        label: 'Low Flow',
         backgroundColor: '#0694a2',
         borderColor: '#0694a2',
-        data: [43, 48, 40, 54, 67, 73, 70],
+        data: [30, 35, 40, 45, 50, 55, 60, 65], // Valores representando o fluxo médio cardíaco em ventilador mecânico
         fill: false,
       },
       {
-        label: 'Paid',
-        fill: false,
-        /**
-         * These colors come from Tailwind CSS palette
-         * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-         */
+        label: 'Medium Flow',
         backgroundColor: '#7e3af2',
         borderColor: '#7e3af2',
-        data: [24, 50, 64, 74, 52, 51, 65],
+        data: [40, 45, 50, 55, 60, 65, 70, 75], // Valores representando o fluxo médio cardíaco em ventilador mecânico
+        fill: false,
       },
     ],
   },
@@ -83,7 +67,7 @@ export const lineOptions = {
         display: true,
         scaleLabel: {
           display: true,
-          labelString: 'Month',
+          labelString: 'Time of Day',
         },
       },
       y: {
@@ -98,21 +82,28 @@ export const lineOptions = {
   legend: {
     display: false,
   },
-}
+};
+
+
+
+export const barLegends: ILegends[] = [
+  { title: 'dado1', color: 'bg-teal-600' },
+  { title: 'dado2', color: 'bg-purple-600' },
+]
 
 export const barOptions = {
   data: {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm'],
     datasets: [
       {
-        label: 'Shoes',
+        label: 'dado1',
         backgroundColor: '#0694a2',
         // borderColor: window.chartColors.red,
         borderWidth: 1,
         data: [-3, 14, 52, 74, 33, 90, 70],
       },
       {
-        label: 'Bags',
+        label: 'dado2',
         backgroundColor: '#7e3af2',
         // borderColor: window.chartColors.blue,
         borderWidth: 1,

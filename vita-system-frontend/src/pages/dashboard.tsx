@@ -96,14 +96,11 @@ export default function Dashboard() {
   
   return (
     <section className="">
-      <div className="flex flex-col items-center">
+      {/* <div className="flex flex-col items-center"> */}
 
 
-{/*           <Layout> */}
-        {/* <PageTitle>Dashboard</PageTitle> */}
-  
-        {/* <!-- Cards --> */}
-        <h2 className="m-[1rem] font-extrabold text-[30px]">Dashboard</h2>
+        <Layout>
+        <PageTitle><h2 className="m-[1rem] font-extrabold text-[30px]">Dashboard</h2></PageTitle>
         <div>
 
  
@@ -280,7 +277,7 @@ export default function Dashboard() {
                 },
               }}
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm'],
                 datasets: [{
                   label: 'My First dataset',
                   backgroundColor: 'transparent',
@@ -367,7 +364,7 @@ export default function Dashboard() {
                 },
               }}
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm'],
                 datasets: [{
                   label: 'My First dataset',
                   backgroundColor: 'transparent',
@@ -441,7 +438,7 @@ export default function Dashboard() {
                 },
               }}
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm'],
                 datasets: [{
                   label: 'My First dataset',
                   backgroundColor: 'rgba(255,255,255,.2)',
@@ -518,7 +515,7 @@ export default function Dashboard() {
                 },
               }}
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'January', 'February', 'March', 'April'],
+                labels: ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm'],
                 datasets: [{
                   label: 'My First dataset',
                   backgroundColor: 'rgba(255,255,255,.2)',
@@ -586,7 +583,7 @@ export default function Dashboard() {
         >
           <Line
             data={{
-              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+              labels: ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm'],
               datasets: [{
                 label: 'My First dataset',
                 backgroundColor: 'rgba(0, 0, 0, 0.2)',
@@ -594,6 +591,8 @@ export default function Dashboard() {
                 pointHoverBackgroundColor: '#fff',
                 borderWidth: 2,
                 data: [
+                  random(50, 200),
+                  random(50, 200),
                   random(50, 200),
                   random(50, 200),
                   random(50, 200),
@@ -616,6 +615,8 @@ export default function Dashboard() {
                   random(50, 200),
                   random(50, 200),
                   random(50, 200),
+                  random(50, 200),
+                  random(50, 200),
                 ],
               }, {
                 label: 'My Third dataset',
@@ -623,7 +624,7 @@ export default function Dashboard() {
                 pointHoverBackgroundColor: '#fff',
                 borderWidth: 1,
                 borderDash: [8, 5],
-                data: [65, 65, 65, 65, 65, 65, 65],
+                data: [65, 65, 65, 65, 65, 65, 65,65, 65, 65],
               }],
             }}
             options={{
@@ -736,12 +737,12 @@ export default function Dashboard() {
         </ChartCard>
       </div>
     </div>
-{/*       </Layout>   */}     
+   </Layout>       
 
 
         {session?.user?.name}
         <button onClick={() => signOut()}>Sign out</button>
-      </div>
+     {/*  </div> */}
     </section>
   )
 }
