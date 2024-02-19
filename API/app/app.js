@@ -64,13 +64,15 @@ app.post('/set_log', (req, res) => {
   const {client, dados} = req.body;
   const dataAtual = new Date();
 
+  var dados_json = JSON.stringify(dados);
+
   connection = connectionRequest();
 
   // SQL para inserção
-  const query = 'INSERT INTO dados (data_c, server, dados) VALUES ( ?, ?, ?)';
+  const query = 'INSERT INTO dados (data_c, server, dados, status) VALUES ( ?, ?, ?, ?)';
 
   // Parâmetros para substituir os placeholders no SQL
-  const parametros = [dataAtual, client, dados];
+  const parametros = [dataAtual, client, dados_json, 1];
 
   connection.query(query, parametros, (err, results) => {
     if (err) {

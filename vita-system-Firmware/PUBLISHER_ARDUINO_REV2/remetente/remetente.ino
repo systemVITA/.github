@@ -34,8 +34,9 @@ void connectToWiFi() {
 void connectToMQTT() {
   client.setServer(mqtt_server, mqtt_port);
   while (!client.connected()) {
-    Serial.print("Conectando ao servidor MQTT...");
-    if (client.connect("arduino-rev2-client", mqtt_user, mqtt_password)) {
+    Serial.print("Conectando ao servidor MQTT..." );
+    Serial.print(mqtt_server);
+    if (client.connect("arduino-rev2-client",mqtt_user, mqtt_password)) {
       Serial.println("Conectado!");
       client.subscribe("button");
     } else {
@@ -56,7 +57,7 @@ void setup() {
 void loop() {
   client.loop();
   jsonDoc["id"] = random(1, 100); 
-  jsonDoc["Volume_corrente"] = random(50, 200); 
+  jsonDoc["Volume_corrente"] = random(250, 600); 
   jsonDoc["Razao_IE"] = random(1, 10);  
   jsonDoc["Frequencia"] = random(10, 30);  
   jsonDoc["Fluxo_medio"] = random(100, 500);  
@@ -69,5 +70,5 @@ void loop() {
 
   client.publish("messages", jsonBuffer);
 
-  delay(1000);
+  delay(5000);
 }

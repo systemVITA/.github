@@ -8,8 +8,6 @@ networks:
   REDE:
     external: true
 
-
-
 services:
 
   mqtt-pub:

@@ -8,6 +8,8 @@ services:
     ports:
       - "1883:1883" #default mqtt port
       - "9011:9001" #default mqtt port for websockets
+    expose:
+      - "3033"
     volumes:
       - ./config:/mosquitto/config:rw
       - ./data:/mosquitto/data:rw

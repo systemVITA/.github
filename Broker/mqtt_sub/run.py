@@ -3,13 +3,13 @@ import requests
 import json
 import time
 
-mqtt_broker = "mqtt5"  # Usando o nome do contêiner como host
+mqtt_broker = "mqtt5"  
 mqtt_port = 1883
 mqtt_topic = "messages"
 mqtt_user = "user1"
 mqtt_pw = "123"
 
-api_url = "http://193.203.174.233:3033"
+api_url = "http://my_node:3033"
 api_endpoint = "/set_log"
 api_headers = {"Content-Type": "application/json"}
 

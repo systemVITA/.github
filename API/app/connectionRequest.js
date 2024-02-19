@@ -2,7 +2,7 @@ module.exports = function () {
     let mysql = require("mysql2");
 
     const conex = mysql.createConnection({
-                                            host:"127.0.0.1",
+                                            host:"mysql_vita",
                                             user:"root",
                                             password:"root",
                                             database:"mysql_vita",

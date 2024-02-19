@@ -1,8 +1,8 @@
 #ifndef SECRETS_H
 #define SECRETS_H
 
-const char* ssid = "DOMINICI";
-const char* password = "99731540";
+const char* ssid = "IEE";
+const char* password = "iee@ufma.br";
 /*const char* ssid = "Luis";
 const char* password = "c0gum3l0";*/
 /* const char* mqtt_server = "localhost"; */
